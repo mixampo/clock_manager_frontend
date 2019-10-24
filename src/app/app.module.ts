@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -9,6 +10,9 @@ import {DropdownDirective} from './shared/dropdown.directive';
 import { OverviewComponent } from './overview/overview.component';
 import { ClockingComponent } from './clocking/clocking.component';
 import { LoginComponent } from './login/login.component';
+import { SignupComponent } from './signup/signup.component';
+import {FormsModule} from '@angular/forms';
+import {UserService} from './service/user.service';
 
 @NgModule({
   declarations: [
@@ -18,13 +22,16 @@ import { LoginComponent } from './login/login.component';
     DropdownDirective,
     OverviewComponent,
     ClockingComponent,
-    LoginComponent
+    LoginComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
