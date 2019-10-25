@@ -8,12 +8,15 @@ import {SignupComponent} from './signup/signup.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'signin', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
   { path: 'home', component: HomeComponent },
   { path: 'overview', component: OverviewComponent },
-  { path: 'clocking', component: ClockingComponent }
+  { path: 'clocking', component: ClockingComponent },
+
+  /* If page not found redirect to sign in page */
+  //{ path: '**', redirectTo: ''}
 ];
 
 @NgModule({

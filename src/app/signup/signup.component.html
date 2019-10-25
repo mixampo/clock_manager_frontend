@@ -16,7 +16,15 @@
       <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid e-mail address</span>
     </div>
     <div class="form-group">
-      <input type="password" class="form-control" name="password" placeholder="Password" required ngModel #password="ngModel">
+      <input type="password" class="form-control" name="password" placeholder="Password" required ngModel>
+    </div>
+    <div class="form-group">
+      <label for="department">Department</label>
+        <select id="department" class="form-control" name="department" [ngModel]="defaultDepartment">
+          <option *ngFor="let department of departments" [ngValue]="department">
+            {{ department.name }}
+          </option>
+        </select>
     </div>
 <!--<div class="form-group">-->
 <!--<input type="password" class="form-control" name="confirm_password" placeholder="Confirm Password" required ngModel>-->
@@ -24,6 +32,24 @@
     <hr>
     <div class="form-group">
       <button [disabled]="!f.valid" type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
+    </div>
+    <div class="text-center" *ngIf="loading">
+      <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggY
+      WpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wykl
+      rE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa
+      +dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikR
+      xQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkEC
+      QoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJ
+      hmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsA
+      AAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoK
+      w0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAA
+      zIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6Tw
+      fwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjd
+      Oe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSl
+      KAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwl
+      WCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAA
+      ALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpy
+      rCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
     </div>
   </form>
   <div class="text-center">Already have an account? <a routerLink="/signin">Sign in</a></div>

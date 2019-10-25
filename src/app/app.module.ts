@@ -13,6 +13,8 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import {FormsModule} from '@angular/forms';
 import {UserService} from './service/user.service';
+import {DepartmentService} from './service/department.service';
+import {AlertService} from './service/alert.service';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import {UserService} from './service/user.service';
     FormsModule,
     HttpClientModule
   ],
-  providers: [UserService],
+  providers: [UserService, DepartmentService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

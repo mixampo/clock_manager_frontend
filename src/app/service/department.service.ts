@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {User} from '../model/user';
+import {Department} from '../model/department';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UserService {
+export class DepartmentService {
   private apiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
 
   }
 
-  signUpUser(user: User) {
-    return this.http.post(this.apiUrl + '/signup', user)
-  }
-
-  getAllUsers() {
-    this.http.get(this.apiUrl + '/users ')
+  getDepartments() {
+    return this.http.get<Department[]>(this.apiUrl + '/departments')
   }
 }
