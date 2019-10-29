@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {NgForm} from '@angular/forms';
-import {UserService} from '../service/user.service';
-import {delay, first} from 'rxjs/operators';
-import {Router} from '@angular/router';
-import {DepartmentService} from '../service/department.service';
-import {Department} from '../model/department';
-import {AlertService} from '../service/alert.service';
+import { NgForm } from '@angular/forms';
+import { UserService } from '../service/user.service';
+import { first } from 'rxjs/operators';
+import { Router } from '@angular/router';
+import { DepartmentService } from '../service/department.service';
+import { Department } from '../model/department';
+import { AlertService } from '../service/alert.service';
 
 @Component({
   selector: 'app-signup',
