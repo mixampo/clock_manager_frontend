@@ -15,6 +15,8 @@ import {FormsModule} from '@angular/forms';
 import {UserService} from './service/user.service';
 import {DepartmentService} from './service/department.service';
 import {AlertService} from './service/alert.service';
+import {WorkTimeRegistrationService} from "./service/work-time-registration.service";
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -31,9 +33,10 @@ import {AlertService} from './service/alert.service';
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
-  providers: [UserService, DepartmentService, AlertService],
+  providers: [UserService, DepartmentService, AlertService, WorkTimeRegistrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
