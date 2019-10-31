@@ -14,9 +14,9 @@ import { SignupComponent } from './signup/signup.component';
 import {FormsModule} from '@angular/forms';
 import {UserService} from './service/user.service';
 import {DepartmentService} from './service/department.service';
-import {AlertService} from './service/alert.service';
 import {WorkTimeRegistrationService} from "./service/work-time-registration.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import {AlertService} from './service/alert.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +36,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     NgbModule
   ],
-  providers: [UserService, DepartmentService, AlertService, WorkTimeRegistrationService],
+  providers: [UserService, DepartmentService, WorkTimeRegistrationService, AlertService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

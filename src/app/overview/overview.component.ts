@@ -12,13 +12,22 @@ import {WorkTimeRegistration} from "../model/workTimeRegistration";
 export class OverviewComponent implements OnInit {
   workTimeRegistrations: WorkTimeRegistration[];
 
-  constructor(private userService: UserService, private WorkTimeRegistration: WorkTimeRegistrationService) { }
+  constructor(private userService: UserService, private WorkTimeRegistrationService: WorkTimeRegistrationService) { }
 
   ngOnInit() {
+    this.WorkTimeRegistrationService.getWorkTimeRegistrations()
+      .subscribe(workTimeRegistrations => {
+        this.workTimeRegistrations = workTimeRegistrations;
+        console.log(this.workTimeRegistrations)
+      });
   }
 
   onGetOverview(form: NgForm) {
 
+  }
+
+  onClearOverview() {
+    this.workTimeRegistrations = [];
   }
 
 }

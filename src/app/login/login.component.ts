@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {NgForm} from '@angular/forms';
+import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-login',
@@ -7,13 +8,15 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  userRegistrationSuccess: boolean = false;
 
-  constructor() { }
+  constructor(private alertService: AlertService) { }
 
   ngOnInit() {
+    this.userRegistrationSuccess = this.alertService.getRegistrationSuccess();
   }
 
-  onSignIn(from: NgForm) {
+  onSignIn(form: NgForm) {
 
   }
 }

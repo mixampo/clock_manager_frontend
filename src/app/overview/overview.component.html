@@ -1,5 +1,8 @@
 <hr>
-<table class="table table-striped">
+<div class="alert alert-info" *ngIf="workTimeRegistrations.length <= 0">
+  Overview is empty, please specify dates and click on the `Fetch Overview` button
+</div>
+<table class="table table-striped" *ngIf="workTimeRegistrations.length > 0">
   <thead>
   <tr>
     <th scope="col">Date</th>
@@ -10,45 +13,33 @@
     <th scope="col">Activity</th>
   </tr>
   </thead>
-<!--  <tbody *ngFor="let workTimeRegistration of workTimeRegistrations">-->
-<!--  <tr>-->
-<!--    <td>{{ workTimeRegistration.workingDayDate }}</td>-->
-<!--    <td>{{ workTimeRegistration.startTime }}</td>-->
-<!--    <td>{{ workTimeRegistration.endTime }}</td>-->
-<!--    <td>{{ workTimeRegistration.totalWorkingHours }}</td>-->
-<!--    <td>{{ workTimeRegistration.department }}</td>-->
-<!--    <td>{{ workTimeRegistration.activity }}</td>-->
-<!--  </tr>-->
-<!--  </tbody>-->
-  <tbody>
+  <tbody *ngFor="let workTimeRegistration of workTimeRegistrations">
   <tr>
-    <td>30-10-2019</td>
-    <td>07:40</td>
-    <td>16:40</td>
-    <td>9</td>
-    <td>Office</td>
-    <td>Administration</td>
+    <td>{{ workTimeRegistration.workingDayDate }}</td>
+    <td>{{ workTimeRegistration.workingDayStartTime }}</td>
+    <td>{{ workTimeRegistration.workingDayEndTime }}</td>
+    <td>{{ workTimeRegistration.totalWorkingHours }}</td>
+    <td>{{ workTimeRegistration.activity.department.name }}</td>
+    <td>{{ workTimeRegistration.activity.name }}</td>
   </tr>
   </tbody>
 </table>
 <hr>
-<div class="row">
-  <div class="col-xs-12">
+<div class="container">
+  <div class="row">
     <form #f="ngForm" (ngSubmit)="onGetOverview(f)">
-      <div class="row">
-        <div class="col-sm-3 form-group">
-          <label for="startdate">Startdate</label>
-          <input type="date" id="startdate" class="form-control">
-        </div>
-        <div class="col-sm-3 form-group">
-          <label for="enddate">Enddate</label>
-          <input type="date" id="enddate" class="form-control">
-        </div>
-        <div class=" col-sm-3 form-group">
-          <button class="btn btn-primary" type="submit">Fetch overview</button>
-          |
-          <button class="btn btn-danger">Clear overview</button>
-        </div>
+      <div class="col-sm-3 form-group">
+        <label for="startdate">Startdate</label>
+        <input type="date" id="startdate" class="form-control">
+      </div>
+      <div class="col-sm-3 form-group">
+        <label for="enddate">Enddate</label>
+        <input type="date" id="enddate" class="form-control">
+      </div>
+      <div class="col-sm-3 form-group">
+        <button class="btn btn-primary" type="submit">Fetch overview</button>
+        |
+        <button class="btn btn-danger" (click)="onClearOverview()">Clear overview</button>
       </div>
     </form>
   </div>

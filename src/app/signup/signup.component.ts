@@ -5,7 +5,7 @@ import { first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { DepartmentService } from '../service/department.service';
 import { Department } from '../model/department';
-import { AlertService } from '../service/alert.service';
+import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-signup',
@@ -20,6 +20,7 @@ export class SignupComponent implements OnInit {
   constructor(private userService: UserService, private departmentService: DepartmentService, private alertService: AlertService, private router: Router) { }
 
   ngOnInit() {
+    this.alertService.setRegistrationSuccess(false);
     this.departmentService.getDepartments()
       .subscribe(departments => {
         this.departments = departments;
@@ -30,11 +31,11 @@ export class SignupComponent implements OnInit {
   onSignup(form: NgForm) {
     this.loading = true;
     console.log(form.value);
+    this.alertService.toggleRegistrationSuccess();
     this.userService.signUpUser(form.value)
       .pipe(first())
       .subscribe(
         data => {
-          this.alertService.success('Registration successfull', true);
           this.router.navigate(['/signin']);
           form.reset();
       })
