@@ -1,6 +1,9 @@
 <div class="container">
   <div class="row">
     <div class="signup-form">
+      <div class="alert alert-danger" *ngIf="error">
+        Wrong username/password provided
+      </div>
       <div class="alert alert-success" *ngIf="userRegistrationSuccess">
         Registration Successful
       </div>

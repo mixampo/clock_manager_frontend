@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Department} from '../model/department';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import {WorkTimeRegistration} from '../model/workTimeRegistration';
 
 @Injectable({
@@ -11,7 +10,13 @@ export class WorkTimeRegistrationService {
 
   constructor(private http: HttpClient) { }
 
-  getWorkTimeRegistrations() {
-    return this.http.get<WorkTimeRegistration[]>(this.apiUrl + '/worktime-registrations')
+  getWorkTimeRegistrations(id: number) {
+    return this.http
+      .get<WorkTimeRegistration[]>(
+        this.apiUrl + '/worktime-registrations',
+        {
+          params: new HttpParams().set("userId", id.toString())
+        }
+      )
   }
 }

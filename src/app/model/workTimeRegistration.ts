@@ -4,7 +4,7 @@ import {Department} from "./department";
 import {Time} from '@angular/common';
 
 export class WorkTimeRegistration {
-  user: User;
+  user?: User;
   activity: Activity;
   department: Department;
   workingDayDate: Date;

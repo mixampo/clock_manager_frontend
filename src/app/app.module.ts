@@ -17,6 +17,7 @@ import {DepartmentService} from './service/department.service';
 import {WorkTimeRegistrationService} from "./service/work-time-registration.service";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AlertService} from './service/alert.service';
+import {AuthService} from './service/auth.service';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,7 @@ import {AlertService} from './service/alert.service';
     HttpClientModule,
     NgbModule
   ],
-  providers: [UserService, DepartmentService, WorkTimeRegistrationService, AlertService],
+  providers: [UserService, DepartmentService, WorkTimeRegistrationService, AlertService, AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

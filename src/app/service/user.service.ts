@@ -12,11 +12,10 @@ export class UserService {
 
   }
 
-  signUpUser(user: User) {
-    return this.http.post(this.apiUrl + '/signup', user)
-  }
-
   getAllUsers() {
-    this.http.get(this.apiUrl + '/users ')
+    this.http
+      .get(
+        this.apiUrl + '/users '
+      )
   }
 }

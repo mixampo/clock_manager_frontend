@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { DepartmentService } from '../service/department.service';
 import { Department } from '../model/department';
 import {AlertService} from '../service/alert.service';
+import {AuthService} from '../service/auth.service';
 
 @Component({
   selector: 'app-signup',
@@ -16,8 +17,9 @@ export class SignupComponent implements OnInit {
   departments: Department[];
   defaultDepartment: Department;
   loading = false;
+  error = null;
 
-  constructor(private userService: UserService, private departmentService: DepartmentService, private alertService: AlertService, private router: Router) { }
+  constructor(private authService: AuthService, private departmentService: DepartmentService, private alertService: AlertService, private router: Router) { }
 
   ngOnInit() {
     this.alertService.setRegistrationSuccess(false);
@@ -30,15 +32,20 @@ export class SignupComponent implements OnInit {
 
   onSignup(form: NgForm) {
     this.loading = true;
-    console.log(form.value);
     this.alertService.toggleRegistrationSuccess();
-    this.userService.signUpUser(form.value)
+
+    this.authService.signUpUser(form.value)
       .pipe(first())
       .subscribe(
-        data => {
+        responseData => {
+          console.log(responseData);
           this.router.navigate(['/signin']);
+          this.loading = false;
+      }, error => {
+          this.loading = false;
+          this.error = error;
+          console.log(error);
           form.reset();
-      })
+      });
   }
-
 }

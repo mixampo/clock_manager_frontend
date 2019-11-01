@@ -13,6 +13,9 @@ export class DepartmentService {
   }
 
   getDepartments() {
-    return this.http.get<Department[]>(this.apiUrl + '/departments')
+    return this.http
+      .get<Department[]>(
+        this.apiUrl + '/departments'
+      )
   }
 }

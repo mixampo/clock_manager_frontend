@@ -15,7 +15,8 @@ export class OverviewComponent implements OnInit {
   constructor(private userService: UserService, private WorkTimeRegistrationService: WorkTimeRegistrationService) { }
 
   ngOnInit() {
-    this.WorkTimeRegistrationService.getWorkTimeRegistrations()
+    //TODO sent id of current logged in user
+    this.WorkTimeRegistrationService.getWorkTimeRegistrations(1)
       .subscribe(workTimeRegistrations => {
         this.workTimeRegistrations = workTimeRegistrations;
         console.log(this.workTimeRegistrations)
