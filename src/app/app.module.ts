@@ -18,6 +18,7 @@ import {WorkTimeRegistrationService} from "./service/work-time-registration.serv
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AlertService} from './service/alert.service';
 import {AuthService} from './service/auth.service';
+import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import {AuthService} from './service/auth.service';
     ClockingComponent,
     LoginComponent,
     SignupComponent,
+    LoadingSpinnerComponent,
   ],
   imports: [
     BrowserModule,

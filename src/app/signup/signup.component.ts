@@ -33,6 +33,7 @@ export class SignupComponent implements OnInit {
   onSignup(form: NgForm) {
     this.loading = true;
     this.alertService.toggleRegistrationSuccess();
+    this.error = null;
 
     this.authService.signUpUser(form.value)
       .pipe(first())
@@ -41,10 +42,10 @@ export class SignupComponent implements OnInit {
           console.log(responseData);
           this.router.navigate(['/signin']);
           this.loading = false;
-      }, error => {
+      }, errorRes => {
           this.loading = false;
-          this.error = error;
-          console.log(error);
+          this.error = errorRes;
+          console.log(errorRes);
           form.reset();
       });
   }

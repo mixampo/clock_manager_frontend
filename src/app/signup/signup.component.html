@@ -1,8 +1,11 @@
 <div class="signup-form">
+  <div class="text-center" *ngIf="loading">
+    <app-loading-spinner></app-loading-spinner>
+  </div>
   <div class="alert alert-danger" *ngIf="error">
     User with specified Username already exists, please create a different Username
   </div>
-  <form #f="ngForm" (ngSubmit)="onSignup(f)">
+  <form #f="ngForm" (ngSubmit)="onSignup(f)" *ngIf="!loading">
     <h2>Sign up</h2>
     <p class="hint-text">Create your account. It's free and only takes a minute.</p>
     <div class="form-group">
@@ -37,24 +40,11 @@
     <div class="form-group">
       <button [disabled]="!f.valid" type="submit" class="btn btn-success btn-lg btn-block">Register Now</button>
     </div>
-    <div class="text-center" *ngIf="loading">
-      <img src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggY
-      WpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wykl
-      rE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa
-      +dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikR
-      xQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkEC
-      QoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJ
-      hmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsA
-      AAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoK
-      w0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAA
-      zIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6Tw
-      fwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjd
-      Oe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSl
-      KAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwl
-      WCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAA
-      ALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpy
-      rCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="/>
-    </div>
   </form>
-  <div class="text-center">Already have an account? <a routerLink="/signin">Sign in</a></div>
+  <div class="text-center" *ngIf="!loading">
+    Already have an account?
+    <a routerLink="/signin">
+      Sign in
+    </a>
+  </div>
 </div>
