@@ -3,6 +3,7 @@ import {UserService} from '../service/user.service';
 import {NgForm} from "@angular/forms";
 import {WorkTimeRegistrationService} from "../service/work-time-registration.service";
 import {WorkTimeRegistration} from "../model/workTimeRegistration";
+import {AuthService} from "../service/auth.service";
 
 @Component({
   selector: 'app-overview',
@@ -12,10 +13,10 @@ import {WorkTimeRegistration} from "../model/workTimeRegistration";
 export class OverviewComponent implements OnInit {
   workTimeRegistrations: WorkTimeRegistration[];
 
-  constructor(private userService: UserService, private WorkTimeRegistrationService: WorkTimeRegistrationService) { }
+  constructor(private userService: UserService, private WorkTimeRegistrationService: WorkTimeRegistrationService, private authService: AuthService) { }
 
   ngOnInit() {
-    //TODO sent id of current logged in user
+    //TODO send id of current logged in user
     this.WorkTimeRegistrationService.getWorkTimeRegistrations(1)
       .subscribe(workTimeRegistrations => {
         this.workTimeRegistrations = workTimeRegistrations;

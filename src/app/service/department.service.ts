@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Department} from '../model/department';
+import {catchError} from "rxjs/operators";
+import {throwError} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +18,10 @@ export class DepartmentService {
     return this.http
       .get<Department[]>(
         this.apiUrl + '/departments'
+      ).pipe(
+        catchError(errorRes => {
+          return throwError(errorRes)
+        })
       )
   }
 }

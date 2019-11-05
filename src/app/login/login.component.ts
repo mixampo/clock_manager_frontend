@@ -21,6 +21,8 @@ export class LoginComponent implements OnInit {
   }
 
   onSignIn(form: NgForm) {
+    this.alertService.setRegistrationSuccess(false);
+    this.userRegistrationSuccess = this.alertService.getRegistrationSuccess();
     this.loading = true;
     this.error = null;
     console.log(form.value);

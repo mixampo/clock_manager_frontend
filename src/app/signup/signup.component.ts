@@ -18,15 +18,20 @@ export class SignupComponent implements OnInit {
   defaultDepartment: Department;
   loading = false;
   error = null;
+  connectionError = null;
 
   constructor(private authService: AuthService, private departmentService: DepartmentService, private alertService: AlertService, private router: Router) { }
 
   ngOnInit() {
+    this.connectionError = null;
     this.alertService.setRegistrationSuccess(false);
     this.departmentService.getDepartments()
       .subscribe(departments => {
         this.departments = departments;
         this.defaultDepartment = this.departments[0]
+      }, errorRes => {
+        this.connectionError = errorRes;
+        console.log(this.connectionError)
       });
   }
 
