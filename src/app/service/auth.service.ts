@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {User} from '../model/user';
 import {HttpClient} from '@angular/common/http';
-import {Subject, throwError} from "rxjs";
+import {BehaviorSubject, Subject, throwError} from "rxjs";
 import {catchError, tap} from "rxjs/operators";
 
 export interface AuthResponseData {
@@ -13,7 +13,7 @@ export interface AuthResponseData {
   providedIn: 'root'
 })
 export class AuthService {
-  user = new Subject<User>();
+  user = new BehaviorSubject<User>(null);
   private apiUrl = 'http://localhost:8080';
 
   constructor(private http: HttpClient) {
@@ -45,7 +45,6 @@ export class AuthService {
           resData.user.email,
           resData.user.department
         );
-        console.log(user);
         this.user.next(user);
       })
     );

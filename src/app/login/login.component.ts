@@ -25,7 +25,6 @@ export class LoginComponent implements OnInit {
     this.userRegistrationSuccess = this.alertService.getRegistrationSuccess();
     this.loading = true;
     this.error = null;
-    console.log(form.value);
 
     this.authService.signInUser(form.value)
       .subscribe(resData => {

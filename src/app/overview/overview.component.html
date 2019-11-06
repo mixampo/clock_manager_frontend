@@ -1,8 +1,8 @@
 <hr>
-<div class="alert alert-info" *ngIf="workTimeRegistrations.length < 1">
+<div class="alert alert-info" *ngIf="!workTimeRegistrations">
   Overview is empty, please specify dates and click on the `Fetch Overview` button
 </div>
-<table class="table table-striped" *ngIf="workTimeRegistrations.length > 0">
+<table class="table table-striped" *ngIf="workTimeRegistrations">
   <thead>
   <tr>
     <th scope="col">Date</th>
