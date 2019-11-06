@@ -49,4 +49,8 @@ export class AuthService {
       })
     );
   }
+
+  signOutUser() {
+    this.user.next(null);
+  }
 }

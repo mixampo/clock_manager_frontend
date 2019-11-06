@@ -21,7 +21,7 @@ export class WorkTimeRegistrationService {
           .get<WorkTimeRegistration[]>(
             this.apiUrl + '/worktime-registrations',
             {
-              headers: new HttpHeaders({ 'Authorization': user.token }),
+              headers: new HttpHeaders({ 'Authorization': `Bearer ${user.token}` }),
               params: new HttpParams().set('userId', user.id.toString())
             }
           )
