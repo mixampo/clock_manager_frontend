@@ -12,6 +12,7 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   userRegistrationSuccess: boolean = false;
   error = null;
+  connectionError = null;
   loading = false;
 
   constructor(private alertService: AlertService, private authService: AuthService, private router: Router) { }

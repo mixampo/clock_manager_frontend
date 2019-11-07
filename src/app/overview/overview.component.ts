@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserService} from '../service/user.service';
-import {NgForm} from "@angular/forms";
-import {WorkTimeRegistrationService} from "../service/work-time-registration.service";
-import {WorkTimeRegistration} from "../model/workTimeRegistration";
-import {AuthService} from "../service/auth.service";
+import {NgForm} from '@angular/forms';
+import {WorkTimeRegistrationService} from '../service/work-time-registration.service';
+import {WorkTimeRegistration} from '../model/workTimeRegistration';
+import {AuthService} from '../service/auth.service';
 
 @Component({
   selector: 'app-overview',
@@ -13,7 +13,8 @@ import {AuthService} from "../service/auth.service";
 export class OverviewComponent implements OnInit {
   workTimeRegistrations: WorkTimeRegistration[];
 
-  constructor(private userService: UserService, private WorkTimeRegistrationService: WorkTimeRegistrationService, private authService: AuthService) { }
+  constructor(private userService: UserService, private WorkTimeRegistrationService: WorkTimeRegistrationService, private authService: AuthService) {
+  }
 
   ngOnInit() {
     this.WorkTimeRegistrationService.getWorkTimeRegistrations()
@@ -23,7 +24,17 @@ export class OverviewComponent implements OnInit {
   }
 
   onGetOverview(form: NgForm) {
+    this.WorkTimeRegistrationService.getWorkTimeRegistrationsByDate(form.value['begindate'], form.value['enddate'])
+      .subscribe(workTimeRegistrations => {
+        this.workTimeRegistrations = workTimeRegistrations;
+      });
+  }
 
+  onGetAll() {
+    this.WorkTimeRegistrationService.getWorkTimeRegistrations()
+      .subscribe(workTimeRegistrations => {
+        this.workTimeRegistrations = workTimeRegistrations;
+      });
   }
 
   onClearOverview() {

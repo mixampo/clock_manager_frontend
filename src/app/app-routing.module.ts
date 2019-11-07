@@ -5,14 +5,16 @@ import {OverviewComponent} from './overview/overview.component';
 import {ClockingComponent} from './clocking/clocking.component';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
+import {AuthGuard} from './auth/auth.guard';
 
 
 const routes: Routes = [
+  { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'signin', component: LoginComponent },
   { path: 'signup', component: SignupComponent },
-  { path: 'home', component: HomeComponent },
-  { path: 'overview', component: OverviewComponent },
-  { path: 'clocking', component: ClockingComponent },
+  { path: 'home', component: HomeComponent, canActivate: [AuthGuard] },
+  { path: 'overview', component: OverviewComponent, canActivate: [AuthGuard] },
+  { path: 'clocking', component: ClockingComponent, canActivate: [AuthGuard] },
 ];
 
 @NgModule({

@@ -30,14 +30,16 @@
     <form #f="ngForm" (ngSubmit)="onGetOverview(f)">
       <div class="col-sm-3 form-group">
         <label for="startdate">Startdate</label>
-        <input type="date" id="startdate" class="form-control">
+        <input type="date" id="startdate" class="form-control" name="begindate" ngModel required>
       </div>
       <div class="col-sm-3 form-group">
         <label for="enddate">Enddate</label>
-        <input type="date" id="enddate" class="form-control">
+        <input type="date" id="enddate" class="form-control" name="enddate" ngModel required>
       </div>
-      <div class="col-sm-3 form-group">
-        <button class="btn btn-primary" type="submit">Fetch overview</button>
+      <div class="col-sm-6 form-group">
+        <button class="btn btn-success" type="submit" [disabled]="!f.valid">Fetch overview</button>
+        |
+        <button class="btn btn-primary" (click)="onGetAll()">Fetch all</button>
         |
         <button class="btn btn-danger" (click)="onClearOverview()">Clear overview</button>
       </div>

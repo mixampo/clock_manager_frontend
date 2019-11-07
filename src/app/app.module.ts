@@ -19,6 +19,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {AlertService} from './service/alert.service';
 import {AuthService} from './service/auth.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import {AuthGuard} from './auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
     WorkTimeRegistrationService,
     AlertService,
     AuthService,
+    AuthGuard
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: AuthInterceptorService,
