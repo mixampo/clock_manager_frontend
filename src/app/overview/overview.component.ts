@@ -19,6 +19,7 @@ export class OverviewComponent implements OnInit {
   ngOnInit() {
     this.WorkTimeRegistrationService.getWorkTimeRegistrations()
       .subscribe(workTimeRegistrations => {
+        this.workTimeRegistrations = [];
         this.workTimeRegistrations = workTimeRegistrations;
       });
   }
@@ -26,6 +27,7 @@ export class OverviewComponent implements OnInit {
   onGetOverview(form: NgForm) {
     this.WorkTimeRegistrationService.getWorkTimeRegistrationsByDate(form.value['begindate'], form.value['enddate'])
       .subscribe(workTimeRegistrations => {
+        this.workTimeRegistrations = [];
         this.workTimeRegistrations = workTimeRegistrations;
       });
   }
@@ -33,6 +35,7 @@ export class OverviewComponent implements OnInit {
   onGetAll() {
     this.WorkTimeRegistrationService.getWorkTimeRegistrations()
       .subscribe(workTimeRegistrations => {
+        this.workTimeRegistrations = [];
         this.workTimeRegistrations = workTimeRegistrations;
       });
   }
