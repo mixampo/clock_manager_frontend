@@ -22,17 +22,17 @@ export class AuthService {
 
   signUpUser(user: User) {
     return this.http.post<any>(
-      this.apiUrl + '/signup', user
+      `${this.apiUrl}/signup`, user
     ).pipe(
       catchError(errorRes => {
-        return throwError(errorRes);
+        return throwError(errorRes)
       })
     );
   }
 
   signInUser(user: User) {
     return this.http.post<AuthResponseData>(
-      this.apiUrl + '/auth', user
+      `${this.apiUrl}/auth`, user
     ).pipe(
       catchError(errorRes => {
         return throwError(errorRes);

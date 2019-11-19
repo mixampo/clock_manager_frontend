@@ -12,7 +12,6 @@ import {Router} from "@angular/router";
 export class LoginComponent implements OnInit {
   userRegistrationSuccess: boolean = false;
   error = null;
-  connectionError = null;
   loading = false;
 
   constructor(private alertService: AlertService, private authService: AuthService, private router: Router) { }
@@ -30,7 +29,7 @@ export class LoginComponent implements OnInit {
     this.authService.signInUser(form.value)
       .subscribe(resData => {
         console.log(resData);
-        this.router.navigate(['/home']);
+        this.router.navigate(['/profile']);
         this.loading = false
       }, error => {
         this.error = error;

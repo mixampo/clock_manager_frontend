@@ -17,7 +17,7 @@ export class DepartmentService {
   getDepartments() {
     return this.http
       .get<Department[]>(
-        this.apiUrl + '/departments'
+        `${this.apiUrl}/departments`
       ).pipe(
         catchError(errorRes => {
           return throwError(errorRes)

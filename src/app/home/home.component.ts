@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {AppRoutingModule} from '../app-routing.module';
 import {Department} from '../model/department';
 import {Router} from '@angular/router';
 import {DepartmentService} from '../service/department.service';
 import {User} from '../model/user';
 import {UserService} from '../service/user.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +16,7 @@ export class HomeComponent implements OnInit {
   defaultDepartment: Department;
   error = null;
   currUser: User;
+  loading = false;
 
   constructor(private router: Router, private departmentService: DepartmentService, private userService: UserService) {
   }
@@ -30,6 +31,25 @@ export class HomeComponent implements OnInit {
         console.log(this.error);
       });
     this.currUser = this.userService.getCurrentUser();
+  }
+
+  onSubmitEdittedProfile(form: NgForm) {
+    this.loading = true;
+    this.userService.updateCurrentUser(form.value)
+      .subscribe(repsonseData => {
+        console.log(repsonseData);
+        this.loading = false;
+        form.reset()
+      }, errorRes => {
+        this.error = errorRes;
+        console.log(this.error);
+        this.loading = false;
+        form.reset()
+      });
+  }
+
+  onCancel() {
+    this.router.navigate(['/clocking'])
   }
 
 }

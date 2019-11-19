@@ -1,4 +1,7 @@
-<div class="container">
+<div class="text-center" *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="container" *ngIf="!loading">
   <h1>Profile</h1>
   <hr>
   <div class="row">
@@ -18,17 +21,17 @@
         This is an <strong>.alert</strong>. Use this to show important messages to the user.
       </div>
       <h3>Personal info</h3>
-      <form class="form-horizontal" role="form">
+      <form class="form-horizontal" #f="ngForm" (ngSubmit)="onSubmitEdittedProfile(f)">
         <div class="form-group">
           <label class="col-lg-3 control-label">First name</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" name="firstname" [value]="currUser.firstname">
+            <input class="form-control" type="text" name="firstname" [ngModel]="currUser.firstname">
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Last name</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" name="lastname" [value]="currUser.lastname">
+            <input class="form-control" type="text" name="lastname" [ngModel]="currUser.lastname">
           </div>
         </div>
         <div class="form-group">
@@ -47,37 +50,33 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">Email</label>
           <div class="col-lg-8">
-            <input class="form-control" type="text" name="email" [value]="currUser.email">
+            <input class="form-control" type="text" name="email" email [ngModel]="currUser.email" #email="ngModel">
+            <span class="help-block" *ngIf="!email.valid && email.touched">Please enter a valid e-mail address</span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Username</label>
           <div class="col-md-8">
-            <input class="form-control" type="text" name="username" [value]="currUser.username">
+            <input class="form-control" type="text" name="username" [ngModel]="currUser.username">
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">New password</label>
           <div class="col-md-8">
-            <input class="form-control" type="password" name="password">
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Confirm new password</label>
-          <div class="col-md-8">
-            <input class="form-control" type="password">
+            <input class="form-control" type="password" name="password" ngModel minlength="8" #password="ngModel">
+            <span class="help-block danger" *ngIf="!password.valid && password.touched">Password must be at least 8 characters</span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label"></label>
           <div class="col-md-8">
-            <input type="button" class="btn btn-primary" value="Save Changes">
+            <input type="submit" class="btn btn-primary" value="Save Changes">
             |
-            <input type="reset" class="btn btn-danger" value="Cancel">
+            <input type="reset" class="btn btn-danger" value="Cancel" (click)="onCancel()">
           </div>
         </div>
       </form>
     </div>
   </div>
+  <hr>
 </div>
-<hr>
