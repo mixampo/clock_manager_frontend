@@ -60,7 +60,7 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmitEdittedProfilePic(form: NgForm) {
-    
+
   }
 
   onCancel() {
