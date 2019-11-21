@@ -1,8 +1,12 @@
-body{
-  margin-top:20px;
-  background:#f8f8f8
-}
-
 input.ng-invalid.ng-touched {
   border: 1px solid red;
+}
+
+img {
+  display: inline-block;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  background-image:url('//placehold.it/100');
 }

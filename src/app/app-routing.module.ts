@@ -6,12 +6,13 @@ import {ClockingComponent} from './clocking/clocking.component';
 import {LoginComponent} from './login/login.component';
 import {SignupComponent} from './signup/signup.component';
 import {AuthGuard} from './auth/auth.guard';
+import {AnonymousAuthGuard} from "./auth/anonymous.auth.guard";
 
 
 const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
-  { path: 'signin', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
+  { path: 'signin', component: LoginComponent, canActivate: [AnonymousAuthGuard] },
+  { path: 'signup', component: SignupComponent, canActivate: [AnonymousAuthGuard] },
   { path: 'profile', component: HomeComponent, canActivate: [AuthGuard] },
   { path: 'overview', component: OverviewComponent, canActivate: [AuthGuard] },
   { path: 'clocking', component: ClockingComponent, canActivate: [AuthGuard] },

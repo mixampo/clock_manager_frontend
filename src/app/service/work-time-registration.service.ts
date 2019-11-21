@@ -47,4 +47,14 @@ export class WorkTimeRegistrationService {
       })
     );
   }
+
+  orderWorkTimeRegistrationsByDate(workTimeRegistrationsA: WorkTimeRegistration, workTimeRegistrationB: WorkTimeRegistration) {
+    if (workTimeRegistrationsA.workingDayDate < workTimeRegistrationB.workingDayDate) {
+      return -1;
+    }
+    if (workTimeRegistrationsA.workingDayDate > workTimeRegistrationB.workingDayDate) {
+      return 1;
+    }
+    return 0;
+  }
 }

@@ -25,6 +25,7 @@ export class SignupComponent implements OnInit {
   ngOnInit() {
     this.connectionError = null;
     this.alertService.setRegistrationSuccess(false);
+    this.alertService.setUpdateProfileSuccess(false);
     this.departmentService.getDepartments()
       .subscribe(departments => {
         this.departments = departments;

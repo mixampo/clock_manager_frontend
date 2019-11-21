@@ -10,6 +10,9 @@
       <div class="alert alert-success" *ngIf="userRegistrationSuccess">
         Registration Successful
       </div>
+      <div class="alert alert-success" *ngIf="userUpdateProfileSuccess">
+        Update profile successful. Re-login required
+      </div>
       <form #f="ngForm" (ngSubmit)="onSignIn(f)" *ngIf="!loading">
         <h2>Sign in</h2>
         <p class="hint-text">Sign in with your personal account</p>

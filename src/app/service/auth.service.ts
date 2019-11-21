@@ -16,6 +16,7 @@ export interface AuthResponseData {
 export class AuthService {
   user = new BehaviorSubject<User>(null);
   private apiUrl = 'http://localhost:8080';
+  isLoggedIn = false;
 
   constructor(private http: HttpClient) {
   }

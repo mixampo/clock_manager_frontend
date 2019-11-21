@@ -17,31 +17,28 @@ export class OverviewComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.WorkTimeRegistrationService.getWorkTimeRegistrations()
-      .subscribe(workTimeRegistrations => {
-        this.workTimeRegistrations = [];
-        this.workTimeRegistrations = workTimeRegistrations;
-      });
+    this.onGetAll();
   }
 
   onGetOverview(form: NgForm) {
     this.WorkTimeRegistrationService.getWorkTimeRegistrationsByDate(form.value['begindate'], form.value['enddate'])
       .subscribe(workTimeRegistrations => {
-        this.workTimeRegistrations = [];
         this.workTimeRegistrations = workTimeRegistrations;
+        this.workTimeRegistrations.sort(this.WorkTimeRegistrationService.orderWorkTimeRegistrationsByDate);
+        form.reset()
       });
   }
 
   onGetAll() {
     this.WorkTimeRegistrationService.getWorkTimeRegistrations()
       .subscribe(workTimeRegistrations => {
-        this.workTimeRegistrations = [];
         this.workTimeRegistrations = workTimeRegistrations;
+        this.workTimeRegistrations.sort(this.WorkTimeRegistrationService.orderWorkTimeRegistrationsByDate);
       });
   }
 
   onClearOverview() {
-    this.workTimeRegistrations = [];
+    this.workTimeRegistrations = null;
   }
 
 }

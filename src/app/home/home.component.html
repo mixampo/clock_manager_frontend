@@ -5,20 +5,23 @@
   <h1>Profile</h1>
   <hr>
   <div class="row">
-    <!-- left column -->
-    <div class="col-md-3">
-      <div class="text-center">
-        <img src="//placehold.it/100" class="avatar img-circle" alt="avatar">
-        <h6>Upload a different photo...</h6>
-        <input type="file" class="form-control">
+    <form #f="ngForm" (ngSubmit)="onSubmitEdditedProfilePic(f)">
+      <div class="col-md-3">
+        <div class="text-center">
+          <img [src]="url" class="avatar img-circle" alt="">
+          <h6>Upload a different photo...</h6>
+          <input type="file" accept="image/*" class="form-control" (change)="processFile($event)">
+          <hr>
+          <button class="btn btn-primary">Upload new profile picture</button>
+        </div>
       </div>
-    </div>
-    <!-- edit form column -->
+    </form>
     <div class="col-md-9 personal-info">
-      <div class="alert alert-info alert-dismissable">
-        <a class="panel-close close" data-dismiss="alert">×</a>
-        <i class="fa fa-coffee"></i>
-        This is an <strong>.alert</strong>. Use this to show important messages to the user.
+      <div class="alert alert-success" *ngIf="userUpdateSuccess">
+        Profile updated successfully
+      </div>
+      <div class="alert alert-danger" *ngIf="error">
+        Profile could not be updated
       </div>
       <h3>Personal info</h3>
       <form class="form-horizontal" #f="ngForm" (ngSubmit)="onSubmitEdittedProfile(f)">
@@ -40,7 +43,8 @@
             Error while loading available Departments
           </div>
           <div class="col-lg-8">
-            <select id="department" class="form-control" name="department" [ngModel]="defaultDepartment" *ngIf="departments">
+            <select id="department" class="form-control" name="department" [ngModel]="defaultDepartment"
+                    *ngIf="departments">
               <option *ngFor="let department of departments" [ngValue]="department">
                 {{ department.name }}
               </option>

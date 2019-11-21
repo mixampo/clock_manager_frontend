@@ -20,6 +20,7 @@ import {AlertService} from './service/alert.service';
 import {AuthService} from './service/auth.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import {AuthGuard} from './auth/auth.guard';
+import {AnonymousAuthGuard} from "./auth/anonymous.auth.guard";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {AuthGuard} from './auth/auth.guard';
     WorkTimeRegistrationService,
     AlertService,
     AuthService,
-    AuthGuard
+    AuthGuard,
+    AnonymousAuthGuard
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: AuthInterceptorService,

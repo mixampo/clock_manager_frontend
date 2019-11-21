@@ -11,6 +11,7 @@ import {Router} from "@angular/router";
 })
 export class LoginComponent implements OnInit {
   userRegistrationSuccess: boolean = false;
+  userUpdateProfileSuccess: boolean = false;
   error = null;
   loading = false;
 
@@ -18,11 +19,14 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.userRegistrationSuccess = this.alertService.getRegistrationSuccess();
+    this.userUpdateProfileSuccess = this.alertService.getUpdateProfileSuccess();
   }
 
   onSignIn(form: NgForm) {
     this.alertService.setRegistrationSuccess(false);
+    this.alertService.setUpdateProfileSuccess(false);
     this.userRegistrationSuccess = this.alertService.getRegistrationSuccess();
+    this.userUpdateProfileSuccess = this.alertService.getUpdateProfileSuccess();
     this.loading = true;
     this.error = null;
 

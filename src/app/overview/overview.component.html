@@ -1,6 +1,6 @@
 <hr>
 <div class="alert alert-info" *ngIf="!workTimeRegistrations">
-  Overview is empty, please specify dates and click on the `Fetch Overview` button
+  Overview is empty, please specify dates and click on the `Fetch Overview` button or click the `Fetch all` button
 </div>
 <table class="table table-striped" *ngIf="workTimeRegistrations">
   <thead>
@@ -38,12 +38,13 @@
       </div>
       <div class="col-sm-6 form-group">
         <button class="btn btn-success" type="submit" [disabled]="!f.valid">Fetch overview</button>
-        |
-        <button class="btn btn-primary" (click)="onGetAll()">Fetch all</button>
-        |
-        <button class="btn btn-danger" (click)="onClearOverview()">Clear overview</button>
       </div>
     </form>
+    <div class="col-sm-8">
+      <button class="btn btn-primary" (click)="onGetAll()">Fetch all</button>
+      |
+      <button class="btn btn-danger" (click)="onClearOverview()">Clear overview</button>
+    </div>
   </div>
 </div>
 <hr>
