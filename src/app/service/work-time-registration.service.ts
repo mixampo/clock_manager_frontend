@@ -25,7 +25,8 @@ export class WorkTimeRegistrationService {
               params: new HttpParams().set('userId', user.id.toString())
             }
           );
-      }));
+      })
+    );
   }
 
   getWorkTimeRegistrationsByDate(beginDate: Date, endDate: Date) {

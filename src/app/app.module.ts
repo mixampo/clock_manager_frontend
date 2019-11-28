@@ -21,6 +21,7 @@ import {AuthService} from './service/auth.service';
 import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
 import {AuthGuard} from './auth/auth.guard';
 import {AnonymousAuthGuard} from "./auth/anonymous.auth.guard";
+import {ActivityService} from './service/activity.service';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import {AnonymousAuthGuard} from "./auth/anonymous.auth.guard";
   providers: [UserService,
     DepartmentService,
     WorkTimeRegistrationService,
+    ActivityService,
     AlertService,
     AuthService,
     AuthGuard,
