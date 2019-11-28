@@ -44,19 +44,23 @@ export class HomeComponent implements OnInit {
   onSubmitEdittedProfile(form: NgForm) {
     this.alertService.toggleUpdateProfileSuccess();
     this.loading = true;
-    this.userService.updateCurrentUser(form.value)
-      .subscribe(repsonseData => {
-        console.log(repsonseData);
-        this.loading = false;
-        this.userUpdateSuccess = true;
-        this.authService.signOutUser();
-        this.router.navigate(['/signin'])
-      }, errorRes => {
-        this.error = errorRes;
-        console.log(this.error);
-        this.loading = false;
-        this.userUpdateSuccess = false;
-      });
+    if (form.value === this.currUser) {
+      console.log('kek')
+    } else {
+      this.userService.updateCurrentUser(form.value)
+        .subscribe(repsonseData => {
+          console.log(repsonseData);
+          this.loading = false;
+          this.userUpdateSuccess = true;
+          this.authService.signOutUser();
+          this.router.navigate(['/signin'])
+        }, errorRes => {
+          this.error = errorRes;
+          console.log(this.error);
+          this.loading = false;
+          this.userUpdateSuccess = false;
+        });
+    }
   }
 
   onSubmitEdittedProfilePic(form: NgForm) {

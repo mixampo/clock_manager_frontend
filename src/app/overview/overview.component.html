@@ -15,7 +15,7 @@
   </thead>
   <tbody *ngFor="let workTimeRegistration of workTimeRegistrations">
   <tr>
-    <td>{{ workTimeRegistration.workingDayDate }}</td>
+    <td>{{ workTimeRegistration.workingDayDate | date : "dd-MM-y" }}</td>
     <td>{{ workTimeRegistration.workingDayStartTime }}</td>
     <td>{{ workTimeRegistration.workingDayEndTime }}</td>
     <td>{{ workTimeRegistration.totalWorkingHours }}</td>
