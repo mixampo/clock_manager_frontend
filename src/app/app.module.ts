@@ -22,6 +22,7 @@ import { LoadingSpinnerComponent } from './shared/loading-spinner/loading-spinne
 import {AuthGuard} from './auth/auth.guard';
 import {AnonymousAuthGuard} from "./auth/anonymous.auth.guard";
 import {ActivityService} from './service/activity.service';
+import { WorktimeRegistrationComponent } from './worktime-registration/worktime-registration.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {ActivityService} from './service/activity.service';
     LoginComponent,
     SignupComponent,
     LoadingSpinnerComponent,
+    WorktimeRegistrationComponent,
   ],
   imports: [
     BrowserModule,
