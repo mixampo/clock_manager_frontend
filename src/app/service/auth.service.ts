@@ -17,6 +17,7 @@ export class AuthService {
   user = new BehaviorSubject<User>(null);
   private apiUrl = 'http://localhost:8080';
   isLoggedIn = false;
+  tokenValidity: number;
 
   constructor(private http: HttpClient) {
   }
@@ -47,6 +48,7 @@ export class AuthService {
           resData.user.email,
           resData.user.department
         );
+        this.tokenValidity = Date.now() + 3600000;
         this.user.next(user);
         localStorage.setItem('userData', JSON.stringify(user));
       })
@@ -59,6 +61,12 @@ export class AuthService {
   }
 
   autoSignIn() {
+
+    if (this.tokenValidity < Date.now()) {
+      this.signOutUser();
+      return;
+    }
+
     const userData: {
       id: number;
       _token: string;

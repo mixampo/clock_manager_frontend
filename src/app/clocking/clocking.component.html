@@ -1,19 +1,55 @@
 <div class="container">
-  <div class="row">
-    <form #f="ngForm" (ngSubmit)="onAddWorkTimeRegistration(f)">
-      <div class="col-xs-6">
-        <div class="form-group">
-          <label for="activity">Activity</label>
-          <div class="alert alert-danger" *ngIf="!activities">
-            Error while loading available activities
-          </div>
-          <select id="activity" class="form-control" name="activity" [ngModel]="defaultActivity" *ngIf="activities">
-            <option *ngFor="let activity of activities" [ngValue]="activity">
-              {{ activity.name }}
-            </option>
-          </select>
+  <form #f="ngForm" (ngSubmit)="onCreateWorkTimeRegistration(f)">
+    <div class="form-group">
+      <div class="col-xs-4">
+        <label for="activity">Activity</label>
+        <div class="alert alert-danger" *ngIf="!activities">
+          Error while loading available activities
+        </div>
+        <select id="activity" class="form-control" name="activity" [ngModel]="defaultActivity" *ngIf="activities">
+          <option *ngFor="let activity of activities" [ngValue]="activity">
+            {{ activity.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-2">
+        <label for="workingdaydate">Working day date</label>
+        <input type="date" id="workingdaydate" class="form-control" name="workingDayDate" ngModel required>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-2">
+        <label for="starttime">Start time</label>
+        <div class="input-group clockpicker">
+          <input type="time" id="starttime" class="form-control" name="workingDayStartTime" ngModel required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span></span>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-2">
+        <label for="endtime">End time</label>
+        <div class="input-group clockpicker">
+          <input type="time" id="endtime" class="form-control" name="workingDayEndTime" ngModel required>
+          <span class="input-group-addon">
+            <span class="glyphicon glyphicon-time"></span></span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-xs-1">
+        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Add</button>
+      </div>
+    </div>
+  </form>
+    <div class="col-xs-1">
+      <button class="btn btn-danger" (click)="onClearFields(f)">Clear</button>
+    </div>
+</div>
+<hr>
+<div class="container">
+  <app-worktime-registration></app-worktime-registration>
 </div>

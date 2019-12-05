@@ -11,4 +11,14 @@ export class WorkTimeRegistration {
   workingDayStartTime: Time;
   workingDayEndTime: Time;
   totalWorkingHours: number;
+
+  constructor(user: User, activity: Activity, department: Department, workingDayDate: Date, workingDayStartTime: Time, workingDayEndTime: Time, totalWorkingHours: number) {
+    this.user = user;
+    this.activity = activity;
+    this.department = department;
+    this.workingDayDate = workingDayDate;
+    this.workingDayStartTime = workingDayStartTime;
+    this.workingDayEndTime = workingDayEndTime;
+    this.totalWorkingHours = totalWorkingHours;
+  }
 }
