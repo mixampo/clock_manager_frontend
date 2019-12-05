@@ -33,7 +33,7 @@ export class ClockingComponent implements OnInit {
       .subscribe(
         responseData => {
           console.log(responseData);
-          form.reset()
+          // form.reset()
         }, errorRes => {
           console.log(errorRes);
         }
