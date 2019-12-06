@@ -24,7 +24,7 @@ export class OverviewComponent implements OnInit {
     this.WorkTimeRegistrationService.getWorkTimeRegistrationsByDate(form.value['begindate'], form.value['enddate'])
       .subscribe(workTimeRegistrations => {
         this.workTimeRegistrations = workTimeRegistrations;
-        this.workTimeRegistrations.sort(this.WorkTimeRegistrationService.orderWorkTimeRegistrationsByDate);
+        this.workTimeRegistrations.sort(this.WorkTimeRegistrationService.orderWorkTimeRegistrationsByDateAsc);
         form.reset()
       });
   }
@@ -33,7 +33,7 @@ export class OverviewComponent implements OnInit {
     this.WorkTimeRegistrationService.getWorkTimeRegistrations()
       .subscribe(workTimeRegistrations => {
         this.workTimeRegistrations = workTimeRegistrations;
-        this.workTimeRegistrations.sort(this.WorkTimeRegistrationService.orderWorkTimeRegistrationsByDate);
+        this.workTimeRegistrations.sort(this.WorkTimeRegistrationService.orderWorkTimeRegistrationsByDateAsc);
       });
   }
 

@@ -33,7 +33,7 @@ export class HomeComponent implements OnInit {
     this.departmentService.getDepartments()
       .subscribe(departments => {
         this.departments = departments;
-        this.defaultDepartment = this.departments[0];
+        this.defaultDepartment = this.departments.find(x => x.id === this.currUser.department.id);
       }, errorRes => {
         this.error = errorRes;
         console.log(this.error);

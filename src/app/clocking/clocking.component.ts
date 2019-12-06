@@ -6,6 +6,7 @@ import {DepartmentService} from '../service/department.service';
 import {Activity} from '../model/activity';
 import {ActivityService} from '../service/activity.service';
 import {first} from 'rxjs/operators';
+import {WorkTimeRegistration} from '../model/workTimeRegistration';
 
 @Component({
   selector: 'app-clocking',
@@ -15,8 +16,14 @@ import {first} from 'rxjs/operators';
 export class ClockingComponent implements OnInit {
   activities: Activity[];
   defaultActivity: Activity;
+  workTimeRegistrations: WorkTimeRegistration[];
 
-  constructor(private workTimeRegistrationService: WorkTimeRegistrationService, private activityService: ActivityService, private departmentService: DepartmentService, private http: HttpClient) {
+  constructor(
+    private workTimeRegistrationService: WorkTimeRegistrationService,
+    private activityService: ActivityService,
+    private departmentService: DepartmentService,
+    private http: HttpClient,
+  ) {
   }
 
   ngOnInit() {
@@ -25,6 +32,7 @@ export class ClockingComponent implements OnInit {
         this.activities = activities;
         this.defaultActivity = this.activities[0];
       });
+    this.onGetAllWorkTimeRegistrations();
   }
 
   onCreateWorkTimeRegistration(form: NgForm) {
@@ -33,7 +41,8 @@ export class ClockingComponent implements OnInit {
       .subscribe(
         responseData => {
           console.log(responseData);
-          // form.reset()
+          form.reset();
+          this.onGetAllWorkTimeRegistrations()
         }, errorRes => {
           console.log(errorRes);
         }
@@ -44,4 +53,11 @@ export class ClockingComponent implements OnInit {
     form.reset();
   }
 
+  onGetAllWorkTimeRegistrations() {
+    this.workTimeRegistrationService.getWorkTimeRegistrations()
+      .subscribe(workTimeRegistrations => {
+        this.workTimeRegistrations = workTimeRegistrations;
+        this.workTimeRegistrations.sort(this.workTimeRegistrationService.orderWorkTimeRegistrationsByDateDesc);
+      });
+  }
 }
