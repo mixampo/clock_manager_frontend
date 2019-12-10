@@ -17,6 +17,7 @@ export class ClockingComponent implements OnInit {
   activities: Activity[];
   defaultActivity: Activity;
   workTimeRegistrations: WorkTimeRegistration[];
+  loading: boolean = false;
 
   constructor(
     private workTimeRegistrationService: WorkTimeRegistrationService,

@@ -4,7 +4,8 @@ import {Department} from "./department";
 import {Time} from '@angular/common';
 
 export class WorkTimeRegistration {
-  user?: User;
+  id?: number;
+  user: User;
   activity: Activity;
   department: Department;
   workingDayDate: Date;
@@ -12,7 +13,7 @@ export class WorkTimeRegistration {
   workingDayEndTime: Time;
   totalWorkingHours: number;
 
-  constructor(user: User, activity: Activity, department: Department, workingDayDate: Date, workingDayStartTime: Time, workingDayEndTime: Time, totalWorkingHours: number) {
+  constructor(user: User, activity: Activity, department: Department, workingDayDate: Date, workingDayStartTime: Time, workingDayEndTime: Time, totalWorkingHours: number, id?: number) {
     this.user = user;
     this.activity = activity;
     this.department = department;
@@ -20,5 +21,6 @@ export class WorkTimeRegistration {
     this.workingDayStartTime = workingDayStartTime;
     this.workingDayEndTime = workingDayEndTime;
     this.totalWorkingHours = totalWorkingHours;
+    this.id = id;
   }
 }

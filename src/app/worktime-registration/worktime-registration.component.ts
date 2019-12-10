@@ -2,6 +2,8 @@ import {Component, Input, OnInit} from '@angular/core';
 import {WorkTimeRegistration} from '../model/workTimeRegistration';
 import {Activity} from '../model/activity';
 import {ActivityService} from '../service/activity.service';
+import {NgForm} from '@angular/forms';
+import {WorkTimeRegistrationService} from '../service/work-time-registration.service';
 
 @Component({
   selector: 'app-worktime-registration',
@@ -13,7 +15,7 @@ export class WorktimeRegistrationComponent implements OnInit {
   activities: Activity[];
   defaultActivity: Activity;
 
-  constructor(private activityService: ActivityService) { }
+  constructor(private activityService: ActivityService, private WorkTimeRegistrationService: WorkTimeRegistrationService) { }
 
   ngOnInit() {
     this.activityService.getActivitiesByDepartmentId()
@@ -21,6 +23,10 @@ export class WorktimeRegistrationComponent implements OnInit {
         this.activities = activities;
         this.defaultActivity = this.activities.find(x => x.name === this.worktimeRegistration.activity.name)
       });
+  }
+
+  onUpdateWorkTimeRegistration(form: NgForm) {
+
   }
 
 }

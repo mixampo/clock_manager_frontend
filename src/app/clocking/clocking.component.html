@@ -50,6 +50,9 @@
     </div>
 </div>
 <hr>
-<div class="container">
+<div class="text-center" *ngIf="loading">
+  <app-loading-spinner></app-loading-spinner>
+</div>
+<div class="container" *ngIf="!loading">
   <app-worktime-registration *ngFor="let workTimeRegistration of workTimeRegistrations" [worktimeRegistration]="workTimeRegistration"></app-worktime-registration>
 </div>

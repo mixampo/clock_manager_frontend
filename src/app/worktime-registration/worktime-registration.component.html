@@ -1,5 +1,5 @@
 <div class="signup-form">
-  <form #f="ngForm">
+  <form #f="ngForm" (ngSubmit)="onUpdateWorkTimeRegistration(f)">
     <div class="row">
       <div class="col-xs-3">
         <p> working day date: {{ worktimeRegistration.workingDayDate | date : "dd-MM-y" }}</p>
