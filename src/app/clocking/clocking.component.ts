@@ -7,6 +7,7 @@ import {Activity} from '../model/activity';
 import {ActivityService} from '../service/activity.service';
 import {first} from 'rxjs/operators';
 import {WorkTimeRegistration} from '../model/workTimeRegistration';
+import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-clocking',
@@ -18,14 +19,9 @@ export class ClockingComponent implements OnInit {
   defaultActivity: Activity;
   workTimeRegistrations: WorkTimeRegistration[];
   loading: boolean = false;
+  updateSuccess: boolean = false;
 
-  constructor(
-    private workTimeRegistrationService: WorkTimeRegistrationService,
-    private activityService: ActivityService,
-    private departmentService: DepartmentService,
-    private http: HttpClient,
-  ) {
-  }
+  constructor(private workTimeRegistrationService: WorkTimeRegistrationService, private activityService: ActivityService, private alertService: AlertService) {}
 
   ngOnInit() {
     this.activityService.getActivitiesByDepartmentId()
@@ -34,6 +30,11 @@ export class ClockingComponent implements OnInit {
         this.defaultActivity = this.activities[0];
       });
     this.onGetAllWorkTimeRegistrations();
+    this.workTimeRegistrationService.updatedSubject.subscribe(isUpdated => {
+      this.loading = isUpdated;
+      this.updateSuccess = this.alertService.getUpdateWorkTimeRegistrationSuccess();
+      this.onGetAllWorkTimeRegistrations();
+    });
   }
 
   onCreateWorkTimeRegistration(form: NgForm) {
@@ -43,7 +44,7 @@ export class ClockingComponent implements OnInit {
         responseData => {
           console.log(responseData);
           form.reset();
-          this.onGetAllWorkTimeRegistrations()
+          this.onGetAllWorkTimeRegistrations();
         }, errorRes => {
           console.log(errorRes);
         }
@@ -59,6 +60,7 @@ export class ClockingComponent implements OnInit {
       .subscribe(workTimeRegistrations => {
         this.workTimeRegistrations = workTimeRegistrations;
         this.workTimeRegistrations.sort(this.workTimeRegistrationService.orderWorkTimeRegistrationsByDateDesc);
+        this.loading = false;
       });
   }
 }

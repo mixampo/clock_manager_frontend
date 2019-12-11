@@ -4,6 +4,7 @@ import {WorkTimeRegistration} from '../model/workTimeRegistration';
 import {AuthService} from './auth.service';
 import {exhaustMap, take} from 'rxjs/operators';
 import {NgForm} from '@angular/forms';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +12,8 @@ import {NgForm} from '@angular/forms';
 export class WorkTimeRegistrationService {
   private apiUrl = 'http://localhost:8080';
   workTimeRegistration: WorkTimeRegistration;
+  currWorkTimeRegistration: WorkTimeRegistration;
+  updatedSubject =  new Subject<boolean>();
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -72,6 +75,31 @@ export class WorkTimeRegistrationService {
               headers: new HttpHeaders({'Authorization': `Bearer ${user.token}`})
             }
           );
+      })
+    );
+  }
+
+  updateWorkTimeRegistration(formData: NgForm, id: number) {
+    return this.authService.user.pipe(
+      take(1),
+      exhaustMap(user => {
+        this.currWorkTimeRegistration = new WorkTimeRegistration(
+          user,
+          formData.value['activity'],
+          user.department,
+          formData.value['workingDayDate'],
+          formData.value['workingDayStartTime'],
+          formData.value['workingDayEndTime'],
+          0,
+          id
+        );
+        return this.http
+          .put<any>(
+            `${this.apiUrl}/worktime-registrations/${this.currWorkTimeRegistration.id}`, this.currWorkTimeRegistration,
+            {
+              headers: new HttpHeaders({'Authorization': `Bearer ${user.token}`})
+            }
+          )
       })
     );
   }
