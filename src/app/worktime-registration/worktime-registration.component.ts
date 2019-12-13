@@ -29,15 +29,28 @@ export class WorktimeRegistrationComponent implements OnInit {
   }
 
   onUpdateWorkTimeRegistration(form: NgForm) {
-    this.alertService.setUpdateWorkTimeRegistrationSuccess(true);
-    this.workTimeRegistrationService.updatedSubject.next(true);
     this.workTimeRegistrationService.updateWorkTimeRegistration(form, this.worktimeRegistration.id)
       .pipe(first())
       .subscribe(
         responseData => {
+          this.workTimeRegistrationService.updatedSubject.next(true);
           console.log(responseData);
         }, errorRes => {
           console.log(errorRes);
+          this.workTimeRegistrationService.updatedSubject.next(false);
+        }
+      );
+  }
+
+  onDeleteWorkTimeRegistration() {
+    this.workTimeRegistrationService.deleteWorkTimeRegistration(this.worktimeRegistration.id)
+      .subscribe(
+        responseData => {
+          this.workTimeRegistrationService.deletedSubject.next(true);
+          console.log(responseData);
+        }, errorRes => {
+          console.log(errorRes);
+          this.workTimeRegistrationService.deletedSubject.next(false);
         }
       );
   }

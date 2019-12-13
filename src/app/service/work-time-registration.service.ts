@@ -13,7 +13,8 @@ export class WorkTimeRegistrationService {
   private apiUrl = 'http://localhost:8080';
   workTimeRegistration: WorkTimeRegistration;
   currWorkTimeRegistration: WorkTimeRegistration;
-  updatedSubject =  new Subject<boolean>();
+  updatedSubject = new Subject<boolean>();
+  deletedSubject = new Subject<boolean>();
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
@@ -99,7 +100,22 @@ export class WorkTimeRegistrationService {
             {
               headers: new HttpHeaders({'Authorization': `Bearer ${user.token}`})
             }
-          )
+          );
+      })
+    );
+  }
+
+  deleteWorkTimeRegistration(id: number) {
+    return this.authService.user.pipe(
+      take(1),
+      exhaustMap(user => {
+        return this.http
+          .delete<any>(
+            `${this.apiUrl}/worktime-registrations/${id}`,
+            {
+              headers: new HttpHeaders({'Authorization': `Bearer ${user.token}`})
+            }
+          );
       })
     );
   }

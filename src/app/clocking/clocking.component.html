@@ -2,6 +2,15 @@
   <div class="alert alert-success" *ngIf="updateSuccess">
     Update successful
   </div>
+  <div class="alert alert-success" *ngIf="deleteSuccess">
+    Delete successful
+  </div>
+  <div class="alert alert-danger" *ngIf="updateError">
+    Error while updating entry
+  </div>
+  <div class="alert alert-danger" *ngIf="deleteError">
+    Error while deleting entry
+  </div>
   <form #f="ngForm" (ngSubmit)="onCreateWorkTimeRegistration(f)">
     <div class="form-group">
       <div class="col-xs-4">

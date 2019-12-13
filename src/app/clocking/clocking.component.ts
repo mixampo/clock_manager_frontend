@@ -1,8 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {WorkTimeRegistrationService} from '../service/work-time-registration.service';
-import {HttpClient} from '@angular/common/http';
 import {NgForm} from '@angular/forms';
-import {DepartmentService} from '../service/department.service';
 import {Activity} from '../model/activity';
 import {ActivityService} from '../service/activity.service';
 import {first} from 'rxjs/operators';
@@ -20,8 +18,12 @@ export class ClockingComponent implements OnInit {
   workTimeRegistrations: WorkTimeRegistration[];
   loading: boolean = false;
   updateSuccess: boolean = false;
+  deleteSuccess: boolean = false;
+  updateError: boolean = false;
+  deleteError: boolean = false;
 
-  constructor(private workTimeRegistrationService: WorkTimeRegistrationService, private activityService: ActivityService, private alertService: AlertService) {}
+  constructor(private workTimeRegistrationService: WorkTimeRegistrationService, private activityService: ActivityService, private alertService: AlertService) {
+  }
 
   ngOnInit() {
     this.activityService.getActivitiesByDepartmentId()
@@ -32,7 +34,14 @@ export class ClockingComponent implements OnInit {
     this.onGetAllWorkTimeRegistrations();
     this.workTimeRegistrationService.updatedSubject.subscribe(isUpdated => {
       this.loading = isUpdated;
-      this.updateSuccess = this.alertService.getUpdateWorkTimeRegistrationSuccess();
+      this.updateSuccess = isUpdated;
+      this.updateError = !isUpdated;
+      this.onGetAllWorkTimeRegistrations();
+    });
+    this.workTimeRegistrationService.deletedSubject.subscribe(isDeleted => {
+      this.loading = isDeleted;
+      this.deleteSuccess = isDeleted;
+      this.deleteError = !isDeleted;
       this.onGetAllWorkTimeRegistrations();
     });
   }

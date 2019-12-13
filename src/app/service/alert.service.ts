@@ -6,7 +6,6 @@ import { Injectable } from '@angular/core';
 export class AlertService {
   registrationSuccess: boolean = false;
   updateProfileSuccess: boolean = false;
-  updateWorkTimeRegistrationSuccess: boolean = false;
 
   constructor() { }
 
@@ -16,14 +15,6 @@ export class AlertService {
 
   getUpdateProfileSuccess() : boolean {
     return this.updateProfileSuccess;
-  }
-
-  getUpdateWorkTimeRegistrationSuccess(): boolean {
-    return this.updateWorkTimeRegistrationSuccess;
-  }
-
-  setUpdateWorkTimeRegistrationSuccess(value: boolean) {
-    this.updateWorkTimeRegistrationSuccess = value;
   }
 
   setRegistrationSuccess(registrationStatus: boolean): void {
@@ -41,9 +32,4 @@ export class AlertService {
   toggleUpdateProfileSuccess(): void {
     this.updateProfileSuccess = !this.updateProfileSuccess;
   }
-
-  toggleUpdateWorkTimeRegistrationSuccess(): void {
-    this.updateWorkTimeRegistrationSuccess = !this.updateWorkTimeRegistrationSuccess;
-  }
-
 }
