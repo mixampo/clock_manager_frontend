@@ -5,7 +5,6 @@ import {Activity} from '../model/activity';
 import {ActivityService} from '../service/activity.service';
 import {first} from 'rxjs/operators';
 import {WorkTimeRegistration} from '../model/workTimeRegistration';
-import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-clocking',
@@ -22,7 +21,7 @@ export class ClockingComponent implements OnInit {
   updateError: boolean = false;
   deleteError: boolean = false;
 
-  constructor(private workTimeRegistrationService: WorkTimeRegistrationService, private activityService: ActivityService, private alertService: AlertService) {
+  constructor(private workTimeRegistrationService: WorkTimeRegistrationService, private activityService: ActivityService) {
   }
 
   ngOnInit() {

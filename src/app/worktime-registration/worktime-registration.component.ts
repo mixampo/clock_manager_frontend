@@ -5,7 +5,6 @@ import {ActivityService} from '../service/activity.service';
 import {NgForm} from '@angular/forms';
 import {WorkTimeRegistrationService} from '../service/work-time-registration.service';
 import {first} from 'rxjs/operators';
-import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-worktime-registration',
@@ -17,7 +16,7 @@ export class WorktimeRegistrationComponent implements OnInit {
   activities: Activity[];
   defaultActivity: Activity;
 
-  constructor(private activityService: ActivityService, private workTimeRegistrationService: WorkTimeRegistrationService, private alertService: AlertService) {
+  constructor(private activityService: ActivityService, private workTimeRegistrationService: WorkTimeRegistrationService) {
   }
 
   ngOnInit() {
