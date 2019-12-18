@@ -23,6 +23,7 @@ import {AuthGuard} from './auth/auth.guard';
 import {AnonymousAuthGuard} from "./auth/anonymous.auth.guard";
 import {ActivityService} from './service/activity.service';
 import { WorktimeRegistrationComponent } from './worktime-registration/worktime-registration.component';
+import { AlertComponent } from './alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { WorktimeRegistrationComponent } from './worktime-registration/worktime-
     SignupComponent,
     LoadingSpinnerComponent,
     WorktimeRegistrationComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,

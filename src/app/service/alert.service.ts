@@ -1,35 +1,14 @@
 import { Injectable } from '@angular/core';
+import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AlertService {
-  registrationSuccess: boolean = false;
-  updateProfileSuccess: boolean = false;
+
+  messageSubject = new Subject<string>();
+  successSubject = new Subject<boolean>();
+  failureSubject = new Subject<boolean>();
 
   constructor() { }
-
-  getRegistrationSuccess(): boolean {
-    return this.registrationSuccess;
-  }
-
-  getUpdateProfileSuccess() : boolean {
-    return this.updateProfileSuccess;
-  }
-
-  setRegistrationSuccess(registrationStatus: boolean): void {
-    this.registrationSuccess = registrationStatus;
-  }
-
-  setUpdateProfileSuccess(updateProfileSucces: boolean): void {
-    this.updateProfileSuccess = updateProfileSucces;
-  }
-
-  toggleRegistrationSuccess(): void {
-    this.registrationSuccess = !this.registrationSuccess;
-  }
-
-  toggleUpdateProfileSuccess(): void {
-    this.updateProfileSuccess = !this.updateProfileSuccess;
-  }
 }

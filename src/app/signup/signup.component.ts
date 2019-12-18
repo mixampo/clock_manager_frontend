@@ -23,9 +23,6 @@ export class SignupComponent implements OnInit {
   constructor(private authService: AuthService, private departmentService: DepartmentService, private alertService: AlertService, private router: Router) { }
 
   ngOnInit() {
-    this.connectionError = null;
-    this.alertService.setRegistrationSuccess(false);
-    this.alertService.setUpdateProfileSuccess(false);
     this.departmentService.getDepartments()
       .subscribe(departments => {
         this.departments = departments;
@@ -38,7 +35,6 @@ export class SignupComponent implements OnInit {
 
   onSignup(form: NgForm) {
     this.loading = true;
-    this.alertService.toggleRegistrationSuccess();
     this.error = null;
 
     this.authService.signUpUser(form.value)
@@ -46,7 +42,7 @@ export class SignupComponent implements OnInit {
       .subscribe(
         responseData => {
           console.log(responseData);
-          this.router.navigate(['/signin']);
+          this.router.navigate(['signin'], {queryParams: { registered: 'true' } });
           this.loading = false;
       }, errorRes => {
           this.loading = false;

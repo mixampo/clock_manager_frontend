@@ -5,6 +5,7 @@ import {Activity} from '../model/activity';
 import {ActivityService} from '../service/activity.service';
 import {first} from 'rxjs/operators';
 import {WorkTimeRegistration} from '../model/workTimeRegistration';
+import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-clocking',
@@ -16,12 +17,8 @@ export class ClockingComponent implements OnInit {
   defaultActivity: Activity;
   workTimeRegistrations: WorkTimeRegistration[];
   loading: boolean = false;
-  updateSuccess: boolean = false;
-  deleteSuccess: boolean = false;
-  updateError: boolean = false;
-  deleteError: boolean = false;
 
-  constructor(private workTimeRegistrationService: WorkTimeRegistrationService, private activityService: ActivityService) {
+  constructor(private workTimeRegistrationService: WorkTimeRegistrationService, private activityService: ActivityService, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -31,16 +28,12 @@ export class ClockingComponent implements OnInit {
         this.defaultActivity = this.activities[0];
       });
     this.onGetAllWorkTimeRegistrations();
-    this.workTimeRegistrationService.updatedSubject.subscribe(isUpdated => {
-      this.loading = isUpdated;
-      this.updateSuccess = isUpdated;
-      this.updateError = !isUpdated;
+    this.alertService.successSubject.subscribe(isSuccess => {
+      this.loading = isSuccess;
       this.onGetAllWorkTimeRegistrations();
     });
-    this.workTimeRegistrationService.deletedSubject.subscribe(isDeleted => {
-      this.loading = isDeleted;
-      this.deleteSuccess = isDeleted;
-      this.deleteError = !isDeleted;
+    this.alertService.failureSubject.subscribe(isFailure => {
+      this.loading = isFailure;
       this.onGetAllWorkTimeRegistrations();
     });
   }
@@ -50,10 +43,15 @@ export class ClockingComponent implements OnInit {
       .pipe(first())
       .subscribe(
         responseData => {
-          console.log(responseData);
+          this.toggleLoading();
           form.reset();
+          this.setAlertValues(true, 'Add succesful');
           this.onGetAllWorkTimeRegistrations();
+          console.log(responseData);
         }, errorRes => {
+          this.toggleLoading();
+          form.reset();
+          this.setAlertValues(false, 'Error while adding entry');
           console.log(errorRes);
         }
       );
@@ -70,5 +68,15 @@ export class ClockingComponent implements OnInit {
         this.workTimeRegistrations.sort(this.workTimeRegistrationService.orderWorkTimeRegistrationsByDateDesc);
         this.loading = false;
       });
+  }
+
+  setAlertValues(status: boolean, message: string) {
+    this.alertService.successSubject.next(status);
+    this.alertService.failureSubject.next(!status);
+    this.alertService.messageSubject.next(message);
+  }
+
+  toggleLoading() {
+    this.loading = !this.loading;
   }
 }

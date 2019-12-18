@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {AuthService} from './auth.service';
 import {catchError, exhaustMap, take} from 'rxjs/operators';
 import {User} from '../model/user';
-import {throwError} from "rxjs";
+import {throwError} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -29,7 +29,7 @@ export class UserService {
         }
       ).pipe(
         catchError(errorRes => {
-          return throwError(errorRes)
+          return throwError(errorRes);
         })
       );
   }

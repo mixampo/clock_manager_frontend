@@ -4,14 +4,11 @@
       <div class="text-center" *ngIf="loading">
         <app-loading-spinner></app-loading-spinner>
       </div>
-      <div class="alert alert-danger" *ngIf="error">
-        Wrong username/password provided
+      <div class="alert alert-danger" *ngIf="failure">
+        {{ message }}
       </div>
-      <div class="alert alert-success" *ngIf="userRegistrationSuccess">
-        Registration Successful
-      </div>
-      <div class="alert alert-success" *ngIf="userUpdateProfileSuccess">
-        Update profile successful. Re-login required
+      <div class="alert alert-success" *ngIf="success">
+        {{ message }}
       </div>
       <form #f="ngForm" (ngSubmit)="onSignIn(f)" *ngIf="!loading">
         <h2>Sign in</h2>

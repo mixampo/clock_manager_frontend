@@ -5,8 +5,8 @@ import {DepartmentService} from '../service/department.service';
 import {User} from '../model/user';
 import {UserService} from '../service/user.service';
 import {NgForm} from '@angular/forms';
-import {AuthService} from "../service/auth.service";
-import {AlertService} from "../service/alert.service";
+import {AuthService} from '../service/auth.service';
+import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-home',
@@ -42,23 +42,22 @@ export class HomeComponent implements OnInit {
   }
 
   onSubmitEdittedProfile(form: NgForm) {
-    this.alertService.toggleUpdateProfileSuccess();
-    this.loading = true;
+    this.toggleLoading();
     if (form.value === this.currUser) {
-      console.log('kek')
+      this.setAlertValues(false, 'No informatio was changed');
     } else {
       this.userService.updateCurrentUser(form.value)
         .subscribe(repsonseData => {
+          this.toggleLoading();
+          //this.setAlertValues(true, 'Profile updated');
           console.log(repsonseData);
-          this.loading = false;
-          this.userUpdateSuccess = true;
           this.authService.signOutUser();
-          this.router.navigate(['/signin'])
+          this.router.navigate(['signin'], {queryParams: { updated: 'true' } });
         }, errorRes => {
           this.error = errorRes;
+          this.toggleLoading();
+          this.setAlertValues(false, 'Error while updating profile');
           console.log(this.error);
-          this.loading = false;
-          this.userUpdateSuccess = false;
         });
     }
   }
@@ -68,7 +67,7 @@ export class HomeComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigate(['/clocking'])
+    this.router.navigate(['/clocking']);
   }
 
   processFile(event: any) {
@@ -76,10 +75,20 @@ export class HomeComponent implements OnInit {
       const reader = new FileReader();
 
       reader.onload = (event: any) => { // called once readAsDataURL is completed
-        this.url = event.target.result
+        this.url = event.target.result;
       };
       reader.readAsDataURL(event.target.files[0]);
     }
+  }
+
+  setAlertValues(status: boolean, message: string) {
+    this.alertService.successSubject.next(status);
+    this.alertService.failureSubject.next(!status);
+    this.alertService.messageSubject.next(message);
+  }
+
+  toggleLoading() {
+    this.loading = !this.loading;
   }
 
 }

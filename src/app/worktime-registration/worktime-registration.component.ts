@@ -5,6 +5,7 @@ import {ActivityService} from '../service/activity.service';
 import {NgForm} from '@angular/forms';
 import {WorkTimeRegistrationService} from '../service/work-time-registration.service';
 import {first} from 'rxjs/operators';
+import {AlertService} from '../service/alert.service';
 
 @Component({
   selector: 'app-worktime-registration',
@@ -16,7 +17,7 @@ export class WorktimeRegistrationComponent implements OnInit {
   activities: Activity[];
   defaultActivity: Activity;
 
-  constructor(private activityService: ActivityService, private workTimeRegistrationService: WorkTimeRegistrationService) {
+  constructor(private activityService: ActivityService, private workTimeRegistrationService: WorkTimeRegistrationService, private alertService: AlertService) {
   }
 
   ngOnInit() {
@@ -32,11 +33,11 @@ export class WorktimeRegistrationComponent implements OnInit {
       .pipe(first())
       .subscribe(
         responseData => {
-          this.workTimeRegistrationService.updatedSubject.next(true);
+          this.setAlertValues(true, 'Update successful');
           console.log(responseData);
         }, errorRes => {
+          this.setAlertValues(false, 'Error while updating entry');
           console.log(errorRes);
-          this.workTimeRegistrationService.updatedSubject.next(false);
         }
       );
   }
@@ -45,13 +46,19 @@ export class WorktimeRegistrationComponent implements OnInit {
     this.workTimeRegistrationService.deleteWorkTimeRegistration(this.worktimeRegistration.id)
       .subscribe(
         responseData => {
-          this.workTimeRegistrationService.deletedSubject.next(true);
+          this.setAlertValues(true, 'Delete successful');
           console.log(responseData);
         }, errorRes => {
+          this.setAlertValues(false, 'Error while deleting entry');
           console.log(errorRes);
-          this.workTimeRegistrationService.deletedSubject.next(false);
         }
       );
+  }
+
+  setAlertValues(status: boolean, message: string) {
+    this.alertService.successSubject.next(status);
+    this.alertService.failureSubject.next(!status);
+    this.alertService.messageSubject.next(message);
   }
 
 }

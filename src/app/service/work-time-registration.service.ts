@@ -13,8 +13,6 @@ export class WorkTimeRegistrationService {
   private apiUrl = 'http://localhost:8080';
   workTimeRegistration: WorkTimeRegistration;
   currWorkTimeRegistration: WorkTimeRegistration;
-  updatedSubject = new Subject<boolean>();
-  deletedSubject = new Subject<boolean>();
 
   constructor(private http: HttpClient, private authService: AuthService) {
   }
