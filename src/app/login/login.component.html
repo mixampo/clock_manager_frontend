@@ -4,10 +4,10 @@
       <div class="text-center" *ngIf="loading">
         <app-loading-spinner></app-loading-spinner>
       </div>
-      <div class="alert alert-danger" *ngIf="failure">
+      <div class="alert alert-danger" *ngIf="failure && !loading">
         {{ message }}
       </div>
-      <div class="alert alert-success" *ngIf="success">
+      <div class="alert alert-success" *ngIf="success && !loading">
         {{ message }}
       </div>
       <form id="loginform" #f="ngForm" (ngSubmit)="onSignIn(f)" *ngIf="!loading">

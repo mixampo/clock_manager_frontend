@@ -5,7 +5,7 @@
   <div class="alert alert-danger" *ngIf="error">
     User with specified Username already exists, please create a different Username
   </div>
-  <form #f="ngForm" (ngSubmit)="onSignup(f)" *ngIf="!loading">
+  <form id="signupform" #f="ngForm" (ngSubmit)="onSignup(f)" *ngIf="!loading">
     <h2>Sign up</h2>
     <p class="hint-text">Create your account. It's free and only takes a minute.</p>
     <div class="form-group">
@@ -32,7 +32,7 @@
         Error while loading available Departments
       </div>
       <select id="department" class="form-control" name="department" [ngModel]="defaultDepartment" *ngIf="departments">
-        <option *ngFor="let department of departments" [ngValue]="department">
+        <option *ngFor="let department of departments" [ngValue]="department" name="department-list">
           {{ department.name }}
         </option>
       </select>

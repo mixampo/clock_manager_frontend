@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
         this.error = error;
         this.loading = false;
         form.reset();
+        this.setAlertValues(false, 'Wrong credentials provided, please try again');
         console.log(error);
       });
   }
