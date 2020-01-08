@@ -24,7 +24,7 @@
         Profile could not be updated
       </div>
       <h3>Personal info</h3>
-      <form class="form-horizontal" #f="ngForm" (ngSubmit)="onSubmitEdittedProfile(f)">
+      <form class="form-horizontal" id="editprofileform" #f="ngForm" (ngSubmit)="onSubmitEdittedProfile(f)">
         <div class="form-group">
           <label class="col-lg-3 control-label">First name</label>
           <div class="col-lg-8">
@@ -76,7 +76,7 @@
           <div class="col-md-8">
             <input type="submit" class="btn btn-primary" value="Save Changes" [disabled]="!f.valid || !f.dirty">
             |
-            <input type="reset" class="btn btn-danger" value="Cancel" (click)="onCancel()">
+            <input id="canceleditprofile" type="reset" class="btn btn-danger" value="Cancel" (click)="onCancel()">
           </div>
         </div>
       </form>

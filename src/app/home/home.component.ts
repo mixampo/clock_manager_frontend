@@ -90,5 +90,4 @@ export class HomeComponent implements OnInit {
   toggleLoading() {
     this.loading = !this.loading;
   }
-
 }

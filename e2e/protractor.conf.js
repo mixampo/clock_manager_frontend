@@ -14,10 +14,11 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome',
-    // chromeOptions: {
-    //   binary: process.env.CHROME_BIN,
-    //   args: ['--headless', '--no-sandbox']
-    // }
+    chromeOptions: {
+      // binary: process.env.CHROME_BIN,
+      // args: ['--headless', '--no-sandbox']
+      args: ['--disable-web-security']
+    }
   },
   directConnect: true,
   baseUrl: 'http://localhost:4200/',

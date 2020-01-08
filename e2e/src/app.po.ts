@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser } from 'protractor';
 
 export class AppPage {
   navigateTo(path: string) {
@@ -8,4 +8,9 @@ export class AppPage {
       return browser.get(browser.baseUrl + path) as Promise<any>;
     }
   }
+}
+
+export class User {
+  username: string;
+  password: string;
 }
