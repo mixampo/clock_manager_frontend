@@ -1,6 +1,6 @@
 import {AppPage, User} from './app.po';
 import {browser, by, element, logging} from 'protractor';
-import {WorkTimeRegistration} from "../../src/app/model/workTimeRegistration";
+import {WorkTimeRegistration} from '../../src/app/model/workTimeRegistration';
 
 
 describe('signin', () => {
@@ -29,7 +29,7 @@ describe('signin', () => {
     expect(element(by.id('failure')).isDisplayed()).toBe(true);
 
     //Message should contain the following text
-    expect(element(by.id('failure')).getText()).toBe('Wrong credentials provided, please try again')
+    expect(element(by.id('failure')).getText()).toBe('Wrong credentials provided, please try again');
   });
 
   it('Should sign the user in', () => {
@@ -58,7 +58,7 @@ describe('signin', () => {
   afterEach(async () => {
     // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    console.log(logs)
+    console.log(logs);
     // expect(logs).not.toContain(jasmine.objectContaining({
     //   level: logging.Level.SEVERE,
     // } as logging.Entry));
@@ -93,7 +93,7 @@ describe('signup', () => {
 
     //Browser should show error message saying user could not be created because user with specified username already exists
     expect(element(by.id('registrationFailure')).isDisplayed()).toBe(true);
-    expect(element(by.id('registrationFailure')).getText()).toBe('User with specified Username already exists, please create a different Username')
+    expect(element(by.id('registrationFailure')).getText()).toBe('User with specified Username already exists, please create a different Username');
   });
 
   it('should have invalid fields', () => {
@@ -121,7 +121,7 @@ describe('signup', () => {
     expect(departments.get(0).getText()).toBe(' Office ');
     expect(departments.get(1).getText()).toBe(' Laboratory ');
     expect(departments.get(2).getText()).toBe(' Packaging & Sending ');
-    expect(departments.get(3).getText()).toBe(' General ')
+    expect(departments.get(3).getText()).toBe(' General ');
   });
 
   it('should sign up the new user', () => {
@@ -146,13 +146,13 @@ describe('signup', () => {
     expect(element(by.id('success')).isDisplayed()).toBe(true);
 
     //Message should say 'Registration successful'
-    expect(element(by.id('success')).getText()).toBe('Registration successful')
+    expect(element(by.id('success')).getText()).toBe('Registration successful');
   });
 
   afterEach(async () => {
     // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    console.log(logs)
+    console.log(logs);
     // expect(logs).not.toContain(jasmine.objectContaining({
     //   level: logging.Level.SEVERE,
     // } as logging.Entry));
@@ -186,7 +186,7 @@ describe('Switch page login/register', () => {
   afterEach(async () => {
     // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    console.log(logs)
+    console.log(logs);
     // expect(logs).not.toContain(jasmine.objectContaining({
     //   level: logging.Level.SEVERE,
     // } as logging.Entry));
@@ -212,7 +212,7 @@ describe('Header', () => {
 
     element(by.id('profilelink')).click();
 
-    expect(browser.getCurrentUrl()).toEqual(`${browser.baseUrl}profile`)
+    expect(browser.getCurrentUrl()).toEqual(`${browser.baseUrl}profile`);
   });
 
   it('should take the user to the overview page', () => {
@@ -230,7 +230,7 @@ describe('Header', () => {
   afterEach(async () => {
     // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    console.log(logs)
+    console.log(logs);
     // expect(logs).not.toContain(jasmine.objectContaining({
     //   level: logging.Level.SEVERE,
     // } as logging.Entry));
@@ -278,7 +278,7 @@ describe('Profile', () => {
 
     //Browser should show message saying 'Profile updated re-login required'
     expect(element(by.id('success')).isDisplayed()).toBe(true);
-    expect(element(by.id('success')).getText()).toBe('Profile updated re-login required')
+    expect(element(by.id('success')).getText()).toBe('Profile updated re-login required');
   });
 
   it('should direct the user to clocking page', () => {
@@ -295,7 +295,7 @@ describe('Profile', () => {
   afterEach(async () => {
     // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    console.log(logs)
+    console.log(logs);
     // expect(logs).not.toContain(jasmine.objectContaining({
     //   level: logging.Level.SEVERE,
     // } as logging.Entry));
@@ -318,7 +318,7 @@ describe('Overview', () => {
     browser.wait(element(by.id('canceleditprofile')).isPresent());
 
     //Navigate to the overview page
-    page.navigateTo('overview')
+    page.navigateTo('overview');
   });
 
   it('should clear the overview', () => {
@@ -334,7 +334,7 @@ describe('Overview', () => {
 
     //Browser should show message saying the table is empty
     expect(element(by.id('tableempty')).isDisplayed()).toBe(true);
-    expect(element(by.id('tableempty')).getText()).toBe('Overview is empty, please specify dates and click on the `Fetch Overview` button or click the `Fetch all` button')
+    expect(element(by.id('tableempty')).getText()).toBe('Overview is empty, please specify dates and click on the `Fetch Overview` button or click the `Fetch all` button');
   });
 
   it('should fetch the complete overview', () => {
@@ -363,19 +363,64 @@ describe('Overview', () => {
 
     element(by.id('fetch-overview-by-date-form')).submit();
 
-    let worktimeRegistrations = element.all(by.id('worktimeregistrationstable')).all(by.id('tablecontent')).all(by.id('date'));
+    let worktimeRegistrationsDates = element.all(by.id('worktimeregistrationstable')).all(by.id('tablecontent')).all(by.id('date'));
 
-    let first = worktimeRegistrations.get(0);
-    expect(first.getText()).toBeGreaterThan(1092019)
+    let first = worktimeRegistrationsDates.get(0);
+
+    //TODO fix to check if date is between filled in dates from the form
+    first.getText().then((value) => {
+      let firstDate = new Date(value);
+      console.log(firstDate);
+      //expect(firstDate.getMonth()).toBeGreaterThan(8);
+    });
+
+    //Amount of worktime registrations should be greater than 0
+    expect(worktimeRegistrationsDates.count()).toBeGreaterThan(0);
+
   });
-
 
   afterEach(async () => {
     // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
-    console.log(logs)
+    console.log(logs);
     // expect(logs).not.toContain(jasmine.objectContaining({
     //   level: logging.Level.SEVERE,
     // } as logging.Entry));
+  });
+});
+
+describe('Clocking', () => {
+  let page: AppPage;
+
+  beforeEach(() => {
+    page = new AppPage();
+    page.navigateTo('signin');
+
+    //Login
+    element(by.name('username')).sendKeys('test');
+    element(by.name('password')).sendKeys('12345678');
+    element(by.id('loginform')).submit();
+
+    //Wait until the async login function has been completed
+    browser.wait(element(by.id('canceleditprofile')).isPresent());
+
+    //Navigate to the overview page
+    page.navigateTo('clocking');
+  });
+
+  it('should add a new worktime registration', () => {
+
+  });
+
+  it('should clear the fields for adding a new worktime registration', () => {
+
+  });
+
+  it('should update the selected worktime registration', () => {
+
+  });
+
+  it('should delete a worktime registration', () => {
+
   });
 });

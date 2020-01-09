@@ -16,11 +16,11 @@
   <tbody id="tablecontent" *ngFor="let workTimeRegistration of workTimeRegistrations">
   <tr id="tablerow">
     <td id="date">{{ workTimeRegistration.workingDayDate | date : "dd-MM-y" }}</td>
-    <td>{{ workTimeRegistration.workingDayStartTime }}</td>
-    <td>{{ workTimeRegistration.workingDayEndTime }}</td>
-    <td>{{ workTimeRegistration.totalWorkingHours }}</td>
-    <td>{{ workTimeRegistration.activity.department.name }}</td>
-    <td>{{ workTimeRegistration.activity.name }}</td>
+    <td id="starttime">{{ workTimeRegistration.workingDayStartTime }}</td>
+    <td id="endtime">{{ workTimeRegistration.workingDayEndTime }}</td>
+    <td id="workinghours">{{ workTimeRegistration.totalWorkingHours }}</td>
+    <td id="department">{{ workTimeRegistration.activity.department.name }}</td>
+    <td id="activity">{{ workTimeRegistration.activity.name }}</td>
   </tr>
   </tbody>
 </table>
