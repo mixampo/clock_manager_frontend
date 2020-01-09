@@ -1,5 +1,6 @@
 import {AppPage, User} from './app.po';
 import {browser, by, element, logging} from 'protractor';
+import {WorkTimeRegistration} from "../../src/app/model/workTimeRegistration";
 
 
 describe('signin', () => {
@@ -55,7 +56,7 @@ describe('signin', () => {
 
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
+    // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     console.log(logs)
     // expect(logs).not.toContain(jasmine.objectContaining({
@@ -149,7 +150,7 @@ describe('signup', () => {
   });
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
+    // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     console.log(logs)
     // expect(logs).not.toContain(jasmine.objectContaining({
@@ -183,7 +184,7 @@ describe('Switch page login/register', () => {
   });
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
+    // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     console.log(logs)
     // expect(logs).not.toContain(jasmine.objectContaining({
@@ -227,7 +228,7 @@ describe('Header', () => {
   });
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
+    // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     console.log(logs)
     // expect(logs).not.toContain(jasmine.objectContaining({
@@ -292,7 +293,7 @@ describe('Profile', () => {
   });
 
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
+    // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     console.log(logs)
     // expect(logs).not.toContain(jasmine.objectContaining({
@@ -312,22 +313,65 @@ describe('Overview', () => {
     element(by.name('username')).sendKeys('test');
     element(by.name('password')).sendKeys('12345678');
     element(by.id('loginform')).submit();
+
+    //Wait until the async login function has been completed
+    browser.wait(element(by.id('canceleditprofile')).isPresent());
+
+    //Navigate to the overview page
+    page.navigateTo('overview')
   });
 
   it('should clear the overview', () => {
 
+    //Click the clear overview button
+    element(by.id('clearoverview')).click();
+
+    //Get the amount of worktime registrations from the table
+    let worktimeRegistrations = element.all(by.id('worktimeregistrationstable')).all(by.id('tablecontent'));
+
+    //Table containing the worktime registrations should be empty
+    expect(worktimeRegistrations.count()).toBe(0);
+
+    //Browser should show message saying the table is empty
+    expect(element(by.id('tableempty')).isDisplayed()).toBe(true);
+    expect(element(by.id('tableempty')).getText()).toBe('Overview is empty, please specify dates and click on the `Fetch Overview` button or click the `Fetch all` button')
   });
 
   it('should fetch the complete overview', () => {
+    //First clear the overview, as it is automatically fetched at page load
+    element(by.id('clearoverview')).click();
 
+    //Fetch overview
+    element(by.id('fetchall')).click();
+
+    //Get the amount of worktime registrations from the table
+    let worktimeRegistrations = element.all(by.id('worktimeregistrationstable')).all(by.id('tablecontent'));
+
+    //Table containing the worktime registrations should be greather than 0
+    expect(worktimeRegistrations.count()).toBeGreaterThan(0);
+
+    //Message saying the overview is empty should not be shown
+    expect(element(by.id('tableempty')).isDisplayed()).toBe(false);
   });
 
   it('should fetch the overview by date specification', () => {
+    //Enter startdate
+    element(by.id('startdate')).sendKeys('01092019');
 
+    //Enter enddate
+    element(by.id('enddate')).sendKeys('30092019');
+
+    element(by.id('fetch-overview-by-date-form')).submit();
+
+    let worktimeRegistrations = element.all(by.id('worktimeregistrationstable')).all(by.id('tablecontent')).all(by.id('date'));
+
+    let first = worktimeRegistrations.get(0);
+    expect(first.getText()).toBeGreaterThan(1092019)
   });
 
+
   afterEach(async () => {
-    // Assert that there are no errors emitted from the browser
+    // save the browser logs
     const logs = await browser.manage().logs().get(logging.Type.BROWSER);
     console.log(logs)
     // expect(logs).not.toContain(jasmine.objectContaining({

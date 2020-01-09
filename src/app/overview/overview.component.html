@@ -1,8 +1,8 @@
 <hr>
-<div class="alert alert-info" *ngIf="!workTimeRegistrations">
+<div id="tableempty" class="alert alert-info" *ngIf="!workTimeRegistrations">
   Overview is empty, please specify dates and click on the `Fetch Overview` button or click the `Fetch all` button
 </div>
-<table class="table table-striped" *ngIf="workTimeRegistrations">
+<table id="worktimeregistrationstable" class="table table-striped" *ngIf="workTimeRegistrations">
   <thead>
   <tr>
     <th scope="col">Date</th>
@@ -13,9 +13,9 @@
     <th scope="col">Activity</th>
   </tr>
   </thead>
-  <tbody *ngFor="let workTimeRegistration of workTimeRegistrations">
-  <tr>
-    <td>{{ workTimeRegistration.workingDayDate | date : "dd-MM-y" }}</td>
+  <tbody id="tablecontent" *ngFor="let workTimeRegistration of workTimeRegistrations">
+  <tr id="tablerow">
+    <td id="date">{{ workTimeRegistration.workingDayDate | date : "dd-MM-y" }}</td>
     <td>{{ workTimeRegistration.workingDayStartTime }}</td>
     <td>{{ workTimeRegistration.workingDayEndTime }}</td>
     <td>{{ workTimeRegistration.totalWorkingHours }}</td>
@@ -27,23 +27,23 @@
 <hr>
 <div class="container">
   <div class="row">
-    <form #f="ngForm" (ngSubmit)="onGetOverview(f)">
+    <form id="fetch-overview-by-date-form" #f="ngForm" (ngSubmit)="onGetOverview(f)">
       <div class="col-sm-3 form-group">
         <label for="startdate">Startdate</label>
-        <input type="date" id="startdate" class="form-control" name="begindate" ngModel required>
+        <input type="date" id="startdate" class="form-control" name="begindate" #startdate='ngModel' ngModel required>
       </div>
       <div class="col-sm-3 form-group">
         <label for="enddate">Enddate</label>
-        <input type="date" id="enddate" class="form-control" name="enddate" ngModel required>
+        <input type="date" id="enddate" class="form-control" name="enddate" #enddate='ngModel' ngModel required>
       </div>
       <div class="col-sm-3 form-group">
-        <button class="btn btn-success" id="fetch" type="submit" [disabled]="!f.valid">Fetch overview</button>
+        <button class="btn btn-success" id="fetch" type="submit" [disabled]="!f.valid || startdate.value > enddate.value">Fetch overview</button>
       </div>
     </form>
     <div class="col-sm-8">
-      <button class="btn btn-primary" (click)="onGetAll()">Fetch all</button>
+      <button id="fetchall" class="btn btn-primary" [disabled]="workTimeRegistrations" (click)="onGetAll()">Fetch all</button>
       |
-      <button class="btn btn-danger" (click)="onClearOverview()">Clear overview</button>
+      <button id="clearoverview" class="btn btn-danger" [disabled]="!workTimeRegistrations" (click)="onClearOverview()">Clear overview</button>
     </div>
   </div>
 </div>
