@@ -1,6 +1,6 @@
 <div class="container">
   <app-alert></app-alert>
-  <form #f="ngForm" (ngSubmit)="onCreateWorkTimeRegistration(f)">
+  <form id="create-worktime-registration-form" #f="ngForm" (ngSubmit)="onCreateWorkTimeRegistration(f)">
     <div class="form-group">
       <div class="col-xs-4">
         <label for="activity">Activity</label>
@@ -24,7 +24,7 @@
       <div class="col-xs-2">
         <label for="starttime">Start time</label>
         <div class="input-group clockpicker">
-          <input type="time" id="starttime" class="form-control" name="workingDayStartTime" ngModel required>
+          <input #starttime="ngModel" type="time" id="starttime" class="form-control" name="workingDayStartTime" ngModel required>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-time"></span></span>
         </div>
@@ -34,7 +34,7 @@
       <div class="col-xs-2">
         <label for="endtime">End time</label>
         <div class="input-group clockpicker">
-          <input type="time" id="endtime" class="form-control" name="workingDayEndTime" ngModel required>
+          <input #endtime="ngModel" type="time" id="endtime" class="form-control" name="workingDayEndTime" ngModel required>
           <span class="input-group-addon">
             <span class="glyphicon glyphicon-time"></span></span>
         </div>
@@ -42,18 +42,18 @@
     </div>
     <div class="form-group">
       <div class="col-xs-1">
-        <button class="btn btn-primary" type="submit" [disabled]="!f.valid">Add</button>
+        <button id="add-worktime-registration" class="btn btn-primary" type="submit" [disabled]="!f.valid || starttime.value > endtime.value">Add</button>
       </div>
     </div>
   </form>
     <div class="col-xs-1">
-      <button class="btn btn-danger" (click)="onClearFields(f)">Clear</button>
+      <button id="clear-fields" class="btn btn-danger" (click)="onClearFields(f)">Clear</button>
     </div>
 </div>
 <hr>
 <div class="text-center" *ngIf="loading">
   <app-loading-spinner></app-loading-spinner>
 </div>
-<div class="container" *ngIf="!loading">
+<div id="worktime-registration-entries" class="container" *ngIf="!loading">
   <app-worktime-registration *ngFor="let workTimeRegistration of workTimeRegistrations" [worktimeRegistration]="workTimeRegistration"></app-worktime-registration>
 </div>

@@ -1,7 +1,7 @@
-import {AppPage, User} from './app.po';
+import {AppPage} from './app.po';
 import {browser, by, element, logging} from 'protractor';
-import {WorkTimeRegistration} from '../../src/app/model/workTimeRegistration';
-
+import {async} from "@angular/core/testing";
+import {templateJitUrl} from "@angular/compiler";
 
 describe('signin', () => {
   let page: AppPage;
@@ -408,12 +408,76 @@ describe('Clocking', () => {
     page.navigateTo('clocking');
   });
 
-  it('should add a new worktime registration', () => {
+  it('should fetch all the worktime registrations as seperate blocks', () => {
+    //Get the amount of worktime registrations from the page
+    let worktimeRegistrations = element.all(by.id('worktime-registration-entries')).all(by.tagName('app-worktime-registration'));
 
+    //The amount of worktime registrations should be greater than 0
+    expect(worktimeRegistrations.count()).toBeGreaterThan(0);
+  });
+
+  it('should have disabled the add button when the starttime and endtime are invalid (Starttime is after the endtime)', () => {
+    //Set activity
+    element(by.id('activity')).sendKeys('Administration');
+    //Set woring day date
+    element(by.id('workingdaydate')).sendKeys('10012020');
+    //Set starttime
+    element(by.id('starttime')).sendKeys('1600');
+    //Set endtime
+    element(by.id('endtime')).sendKeys('1100');
+
+    expect(element(by.id('add-worktime-registration')).isEnabled()).toBe(false);
+  });
+
+  it('should add a new worktime registration', () => {
+    //Set activity
+    element(by.id('activity')).sendKeys('Administration');
+    //Set woring day date
+    element(by.id('workingdaydate')).sendKeys('10012020');
+    //Set starttime
+    element(by.id('starttime')).sendKeys('0800');
+    //Set endtime
+    element(by.id('endtime')).sendKeys('1800');
+
+    element(by.id('create-worktime-registration-form')).submit();
+
+    //Browser should display message on clocking page after successfully adding a new worktime registration entry
+    expect(element(by.tagName('app-alert')).isDisplayed()).toBe(true);
+    expect(element(by.tagName('app-alert')).getText()).toBe('Add succesful');
+
+    //Add button shoud be disabled after adding new worktime registration
+    expect(element(by.id('add-worktime-registration')).isEnabled()).toBe(false);
+
+    //Fields for adding worktime registration should be emptied
+    expect(element(by.id('activity')).getText()).toBe(' Administration ');
+    expect(element(by.id('workingdaydate')).getAttribute('value')).toBe('');
+    expect(element(by.id('starttime')).getAttribute('value')).toBe('');
+    expect(element(by.id('endtime')).getAttribute('value')).toBe('')
   });
 
   it('should clear the fields for adding a new worktime registration', () => {
+    //Set activity
+    element(by.id('activity')).sendKeys('Administration');
+    //Set woring day date
+    element(by.id('workingdaydate')).sendKeys('11012020');
+    //Set starttime
+    element(by.id('starttime')).sendKeys('1300');
+    //Set endtime
+    element(by.id('endtime')).sendKeys('1900');
 
+    //Fields should have the filled in values
+    expect(element(by.id('activity')).getText()).toBe(' Administration ');
+    expect(element(by.id('workingdaydate')).getAttribute('value')).toBe('2020-01-11');
+    expect(element(by.id('starttime')).getAttribute('value')).toBe('13:00');
+    expect(element(by.id('endtime')).getAttribute('value')).toBe('19:00');
+
+    //Click clear button to clear fields
+    element(by.id('clear-fields')).click();
+
+    //Fields should be empty
+    expect(element(by.id('workingdaydate')).getAttribute('value')).toBe('');
+    expect(element(by.id('starttime')).getAttribute('value')).toBe('');
+    expect(element(by.id('endtime')).getAttribute('value')).toBe('');
   });
 
   it('should update the selected worktime registration', () => {
