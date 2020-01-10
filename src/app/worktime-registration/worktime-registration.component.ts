@@ -24,7 +24,11 @@ export class WorktimeRegistrationComponent implements OnInit {
     this.activityService.getActivitiesByDepartmentId()
       .subscribe(activities => {
         this.activities = activities;
-        this.defaultActivity = this.activities.find(x => x.name === this.worktimeRegistration.activity.name);
+        // if (this.activities.indexOf(this.worktimeRegistration.activity) === -1) {
+        //   this.defaultActivity = this.worktimeRegistration.activity;
+        // } else {
+          this.defaultActivity = this.activities.find(x => x.name === this.worktimeRegistration.activity.name);
+        // }
       });
   }
 
@@ -44,6 +48,7 @@ export class WorktimeRegistrationComponent implements OnInit {
 
   onDeleteWorkTimeRegistration() {
     this.workTimeRegistrationService.deleteWorkTimeRegistration(this.worktimeRegistration.id)
+      .pipe(first())
       .subscribe(
         responseData => {
           this.setAlertValues(true, 'Delete successful');

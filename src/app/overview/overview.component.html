@@ -37,7 +37,7 @@
         <input type="date" id="enddate" class="form-control" name="enddate" #enddate='ngModel' ngModel required>
       </div>
       <div class="col-sm-3 form-group">
-        <button class="btn btn-success" id="fetch" type="submit" [disabled]="!f.valid || startdate.value > enddate.value">Fetch overview</button>
+        <button class="btn btn-success" id="fetch-overview-by-date" type="submit" [disabled]="!f.valid || startdate.value > enddate.value">Fetch overview</button>
       </div>
     </form>
     <div class="col-sm-8">

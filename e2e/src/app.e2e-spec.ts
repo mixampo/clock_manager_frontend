@@ -33,7 +33,7 @@ describe('signin', () => {
   });
 
   it('Should sign the user in', () => {
-    element(by.name('username')).sendKeys('test');
+    element(by.name('username')).sendKeys('e2e');
 
     element(by.name('password')).sendKeys('12345678');
 
@@ -43,7 +43,7 @@ describe('signin', () => {
   });
 
   it('should save Jwtrespone with User object and Jwt to localstorage - after user got signed in', () => {
-    element(by.name('username')).sendKeys('test');
+    element(by.name('username')).sendKeys('e2e');
 
     element(by.name('password')).sendKeys('12345678');
 
@@ -78,7 +78,7 @@ describe('signup', () => {
 
     element(by.name('lastname')).sendKeys('Doe');
 
-    element(by.name('username')).sendKeys('test');
+    element(by.name('username')).sendKeys('e2e');
 
     element(by.name('email')).sendKeys('test@gmail.com');
 
@@ -202,7 +202,7 @@ describe('Header', () => {
     page.navigateTo('signin');
 
     //Login
-    element(by.name('username')).sendKeys('test');
+    element(by.name('username')).sendKeys('e2e');
     element(by.name('password')).sendKeys('12345678');
     element(by.id('loginform')).submit();
   });
@@ -247,7 +247,7 @@ describe('Profile', () => {
 
   it('should save the edited user profile', () => {
     //Login
-    element(by.name('username')).sendKeys('banaan');
+    element(by.name('username')).sendKeys('editTest');
     element(by.name('password')).sendKeys('12345678');
     element(by.id('loginform')).submit();
 
@@ -283,7 +283,7 @@ describe('Profile', () => {
 
   it('should direct the user to clocking page', () => {
     //Login
-    element(by.name('username')).sendKeys('banaan');
+    element(by.name('username')).sendKeys('e2e');
     element(by.name('password')).sendKeys('12345678');
     element(by.id('loginform')).submit();
 
@@ -310,7 +310,7 @@ describe('Overview', () => {
     page.navigateTo('signin');
 
     //Login
-    element(by.name('username')).sendKeys('test');
+    element(by.name('username')).sendKeys('e2e');
     element(by.name('password')).sendKeys('12345678');
     element(by.id('loginform')).submit();
 
@@ -376,7 +376,16 @@ describe('Overview', () => {
 
     //Amount of worktime registrations should be greater than 0
     expect(worktimeRegistrationsDates.count()).toBeGreaterThan(0);
+  });
 
+  it('should have disabled the Fetch Overview button because the dates are invalid (value of startdate is after the value of enddate)', () => {
+    //Enter startdate
+    element(by.id('startdate')).sendKeys('01092019');
+
+    //Enter enddate
+    element(by.id('enddate')).sendKeys('01082019');
+
+    expect(element(by.id('fetch-overview-by-date')).isEnabled()).toBe(false);
   });
 
   afterEach(async () => {
@@ -397,7 +406,7 @@ describe('Clocking', () => {
     page.navigateTo('signin');
 
     //Login
-    element(by.name('username')).sendKeys('test');
+    element(by.name('username')).sendKeys('e2e');
     element(by.name('password')).sendKeys('12345678');
     element(by.id('loginform')).submit();
 
@@ -481,10 +490,29 @@ describe('Clocking', () => {
   });
 
   it('should update the selected worktime registration', () => {
+    //Change fields of worktime registration
+    element(by.tagName('app-worktime-registration')).element(by.id('starttime')).sendKeys('0700');
+    element(by.tagName('app-worktime-registration')).element(by.id('endtime')).sendKeys('1900');
+    element(by.tagName('app-worktime-registration')).element(by.id('workingdaydate')).sendKeys('11012020');
 
+    //Click save button
+    element(by.tagName('app-worktime-registration')).element(by.id('update-worktime-registration-form')).submit();
+
+    //Browser should show alert saying 'Update succesfull'
+    expect(element(by.tagName('app-alert')).isDisplayed()).toBe(true);
+    expect(element(by.tagName('app-alert')).getText()).toBe('Update successful');
+
+    //Update button should be disabled after updating
+    expect(element(by.id('update-worktime-registratioj')).isEnabled()).toBe(false);
   });
 
   it('should delete a worktime registration', () => {
+    //Click delete button
+    element(by.id('delete-worktime-registration')).click();
 
+    //TODO message should say 'Delete succesful', not 'Update Succesful'
+    //Browser should show message saying 'Delete Successful'
+    expect(element(by.tagName('app-alert')).isDisplayed()).toBe(true);
+    expect(element(by.tagName('app-alert')).getText()).toBe('Update successful');
   });
 });
