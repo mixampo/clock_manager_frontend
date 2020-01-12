@@ -195,7 +195,6 @@ describe('Switch page login/register', () => {
   });
 });
 
-// //TODO Fix how to access header elements
 describe('Header', () => {
   let page: AppPage;
 
