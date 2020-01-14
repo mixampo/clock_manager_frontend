@@ -556,8 +556,8 @@ describe('Clocking', () => {
     //Click delete button
     element(by.id('delete-worktime-registration')).click();
 
-    //Browser should show message saying 'Update Successful'
+    //Browser should show message saying 'Delete Successful'
     expect(element(by.tagName('app-alert')).isDisplayed()).toBe(true);
-    expect(element(by.tagName('app-alert')).getText()).toBe('Update successful');
+    expect(element(by.tagName('app-alert')).getText()).toBe('Delete successful');
   });
 });

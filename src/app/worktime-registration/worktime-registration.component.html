@@ -54,9 +54,10 @@
       <div class="form-group">
         <div class="col-xs-12">
           <input id="update-worktime-registration" type="submit" class="btn btn-success" value="Update changes" [disabled]="!f.valid || !f.dirty">
-          <button id="delete-worktime-registration" class="btn btn-danger pull-right" (click)="onDeleteWorkTimeRegistration()">Delete entry</button>
+          <input id="delete-worktime-registration" class="btn btn-danger pull-right" (click)="onDeleteWorkTimeRegistration()" value="Delete entry">
         </div>
       </div>
     </div>
   </form>
+<!--  <button id="delete-worktime-registration" class="btn btn-danger pull-right" (click)="onDeleteWorkTimeRegistration()">Delete entry</button>-->
 </div>

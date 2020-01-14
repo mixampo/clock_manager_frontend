@@ -80,3 +80,7 @@
 .signup-form form a:hover{
   text-decoration: underline;
 }
+
+.signup-form, .delete-worktime-registration {
+  color: #2bf2ff;
+}
