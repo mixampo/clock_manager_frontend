@@ -1,7 +1,5 @@
 import {AppPage} from './app.po';
 import {browser, by, element, logging} from 'protractor';
-import {async} from "@angular/core/testing";
-import {templateJitUrl} from "@angular/compiler";
 
 describe('signin', () => {
   let page: AppPage;
@@ -76,9 +74,9 @@ describe('signup', () => {
   });
 
   it('should not sign the user up - username already exists', () => {
-    element(by.name('firstname')).sendKeys('John');
+    element(by.name('firstname')).sendKeys('New');
 
-    element(by.name('lastname')).sendKeys('Doe');
+    element(by.name('lastname')).sendKeys('User');
 
     element(by.name('username')).sendKeys('e2e');
 
@@ -127,13 +125,13 @@ describe('signup', () => {
   });
 
   it('should sign up the new user', () => {
-    element(by.name('firstname')).sendKeys('John');
+    element(by.name('firstname')).sendKeys('New');
 
-    element(by.name('lastname')).sendKeys('Doe');
+    element(by.name('lastname')).sendKeys('User');
 
     element(by.name('username')).sendKeys('newUser');
 
-    element(by.name('email')).sendKeys('johndoe@gmail.com');
+    element(by.name('email')).sendKeys('newuser@gmail.com');
 
     element(by.name('password')).sendKeys('qwertyuiop');
 
@@ -292,7 +290,7 @@ describe('Profile', () => {
 
   it('should save the edited user profile', () => {
     //Login
-    element(by.name('username')).sendKeys('editTest');
+    element(by.name('username')).sendKeys('editProfileTest');
     element(by.name('password')).sendKeys('12345678');
     element(by.id('loginform')).submit();
 
@@ -504,7 +502,6 @@ describe('Clocking', () => {
     expect(element(by.id('add-worktime-registration')).isEnabled()).toBe(false);
 
     //Fields for adding worktime registration should be emptied
-    expect(element(by.id('activity')).getText()).toBe(' Administration ');
     expect(element(by.id('workingdaydate')).getAttribute('value')).toBe('');
     expect(element(by.id('starttime')).getAttribute('value')).toBe('');
     expect(element(by.id('endtime')).getAttribute('value')).toBe('')
