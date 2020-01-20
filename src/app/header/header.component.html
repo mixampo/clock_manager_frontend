@@ -20,6 +20,15 @@
           </ul>
         </li>
       </ul>
+      <ul class="nav navbar-nav navbar-left">
+        <li class="dropdown" appDropdown>
+          <a id="admin-dropdown" style="..." class="dropdown-toggle" role="button">Admin <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a id="manage-departments" style="..." (click)="onManageDepartments()">Manage departments</a></li>
+            <li><a id="manage-activities" style="..." (click)="onManageActivities()">Manage activities</a></li>
+          </ul>
+        </li>
+      </ul>
     </div>
   </div>
 </nav>

@@ -33,4 +33,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
   onEditProfile() {
     this.router.navigate(['/profile']);
   }
+
+  onManageDepartments() {
+    this.router.navigate(['/departments'])
+  }
+
+  onManageActivities() {
+    this.router.navigate(['/activities'])
+  }
 }

@@ -1,0 +1,56 @@
+<app-loading-spinner *ngIf="loading"></app-loading-spinner>
+<app-alert></app-alert>
+<div class="container" *ngIf="!loading">
+  <hr>
+  <table id="departments-table" class="table table-striped" *ngIf="departments">
+    <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Name</th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody id="tablecontent" *ngFor="let department of departments">
+    <tr id="tablerow">
+      <td>{{ department.id }}</td>
+      <td>{{ department.name }}</td>
+      <td>
+        <button class="btn btn-danger pull-right" (click)="onDeleteDepartment(department)">Delete</button>
+        <button class="btn btn-primary pull-right" (click)="setEditMode(department)">Edit</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <hr>
+  <h3 *ngIf="editMode">Edit Department</h3>
+  <div class="container" *ngIf="editMode">
+    <div class="row">
+      <form id="edit-department" #f="ngForm" (ngSubmit)="onEditDepartment(f)">
+        <div class="col-sm-3 form-group">
+          <label for="departmentName">Name</label>
+          <input type="text" id="EditedDepartmentName" class="form-control" name="name" ngModel required>
+        </div>
+        <div class="col-sm-3 form-group">
+          <button class="btn btn-success" id="updateDepartment" type="submit" [disabled]="!f.valid">Edit department</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <h3 *ngIf="!editMode">Add department</h3>
+  <div class="container" *ngIf="!editMode">
+    <div class="row">
+      <form id="add-department" #f="ngForm" (ngSubmit)="onAddDepartment(f)">
+        <div class="col-sm-3 form-group">
+          <label for="departmentName">Name</label>
+          <input type="text" id="departmentName" class="form-control" name="name" ngModel required>
+        </div>
+        <div class="col-sm-3 form-group">
+          <button class="btn btn-success" id="addDepartment" type="submit" [disabled]="!f.valid">Add department</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<hr>
+
