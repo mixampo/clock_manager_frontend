@@ -71,7 +71,7 @@ export class DepartmentsComponent implements OnInit {
   onEditDepartment(form: NgForm) {
     this.loading = true;
     this.error = null;
-    this.currentDepartment.name = form.value;
+    this.currentDepartment.name = form.value['name'];
     console.log(this.currentDepartment);
 
     this.departmentService.updateDepartment(this.currentDepartment)
