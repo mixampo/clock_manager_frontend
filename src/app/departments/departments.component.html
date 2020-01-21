@@ -29,12 +29,13 @@
       <form id="edit-department" #f="ngForm" (ngSubmit)="onEditDepartment(f)">
         <div class="col-sm-3 form-group">
           <label for="departmentName">Name</label>
-          <input type="text" id="EditedDepartmentName" class="form-control" name="name" ngModel required>
+          <input type="text" id="EditedDepartmentName" class="form-control" name="name" [ngModel]="currentDepartment.name" required>
         </div>
-        <div class="col-sm-3 form-group">
-          <button class="btn btn-success" id="updateDepartment" type="submit" [disabled]="!f.valid">Edit department</button>
+        <div class="col-sm-2 form-group">
+          <button class="btn btn-success" id="updateDepartment" type="submit" [disabled]="!f.valid || !f.dirty">Edit department</button>
         </div>
       </form>
+      <button class="btn btn-primary" id="cancelEdit" (click)="editMode=false">Cancel</button>
     </div>
   </div>
   <h3 *ngIf="!editMode">Add department</h3>
@@ -45,7 +46,7 @@
           <label for="departmentName">Name</label>
           <input type="text" id="departmentName" class="form-control" name="name" ngModel required>
         </div>
-        <div class="col-sm-3 form-group">
+        <div class="col-sm-2 form-group">
           <button class="btn btn-success" id="addDepartment" type="submit" [disabled]="!f.valid">Add department</button>
         </div>
       </form>

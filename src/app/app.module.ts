@@ -26,6 +26,8 @@ import { WorktimeRegistrationComponent } from './worktime-registration/worktime-
 import { AlertComponent } from './alert/alert.component';
 import { ActivitiesComponent } from './activities/activities.component';
 import { DepartmentsComponent } from './departments/departments.component';
+import { ActivityComponent } from './activity/activity.component';
+import {AdminAuthGuard} from './auth/admin.auth.guard';
 
 @NgModule({
   declarations: [
@@ -42,6 +44,7 @@ import { DepartmentsComponent } from './departments/departments.component';
     AlertComponent,
     ActivitiesComponent,
     DepartmentsComponent,
+    ActivityComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +60,8 @@ import { DepartmentsComponent } from './departments/departments.component';
     AlertService,
     AuthService,
     AuthGuard,
-    AnonymousAuthGuard
+    AnonymousAuthGuard,
+    AdminAuthGuard
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: AuthInterceptorService,

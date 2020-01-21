@@ -94,7 +94,7 @@ export class DepartmentsComponent implements OnInit {
 
   setEditMode(department: Department) {
     this.currentDepartment = department;
-    this.editMode = !this.editMode
+    this.editMode = true
   }
 
 

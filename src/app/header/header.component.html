@@ -20,7 +20,7 @@
           </ul>
         </li>
       </ul>
-      <ul class="nav navbar-nav navbar-left">
+      <ul class="nav navbar-nav navbar-left" *ngIf="userService.getCurrentUser().role === 'admin'">
         <li class="dropdown" appDropdown>
           <a id="admin-dropdown" style="..." class="dropdown-toggle" role="button">Admin <span class="caret"></span></a>
           <ul class="dropdown-menu">

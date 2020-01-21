@@ -23,6 +23,7 @@ export class AuthService {
   }
 
   signUpUser(user: User) {
+    user.role = 'user';
     return this.http.post<any>(
       `${this.apiUrl}/signup`, user
     ).pipe(
@@ -46,7 +47,8 @@ export class AuthService {
           resData.user.lastname,
           resData.user.username,
           resData.user.email,
-          resData.user.department
+          resData.user.department,
+          resData.user.role
         );
         this.tokenValidity = Date.now() + 3600000;
         this.user.next(user);
@@ -75,6 +77,7 @@ export class AuthService {
       username: string;
       email: string;
       department: Department;
+      role: string
     } = JSON.parse(localStorage.getItem('userData'));
 
     if (!userData) {
@@ -89,7 +92,8 @@ export class AuthService {
       userData.lastname,
       userData.username,
       userData.email,
-      userData.department
+      userData.department,
+      userData.role
     );
 
     if (loadedUser.token) {
