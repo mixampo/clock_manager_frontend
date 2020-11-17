@@ -13,9 +13,9 @@ const routes: Routes = [
   { path: '', redirectTo: '/signin', pathMatch: 'full' },
   { path: 'signin', component: LoginComponent, canActivate: [AnonymousAuthGuard] },
   { path: 'signup', component: SignupComponent, canActivate: [AnonymousAuthGuard] },
-  { path: 'profile', component: HomeComponent, canActivate: [AuthGuard] },
-  { path: 'overview', component: OverviewComponent, canActivate: [AuthGuard] },
-  { path: 'clocking', component: ClockingComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: HomeComponent },
+  { path: 'overview', component: OverviewComponent},
+  { path: 'clocking', component: ClockingComponent},
 ];
 
 @NgModule({

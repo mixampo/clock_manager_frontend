@@ -122,7 +122,7 @@ describe('signup', () => {
     expect(departments.get(1).getText()).toBe(' Laboratory ');
     expect(departments.get(2).getText()).toBe(' Packaging & Sending ');
     expect(departments.get(3).getText()).toBe(' General ');
-  });
+  })
 
   it('should sign up the new user', () => {
     element(by.name('firstname')).sendKeys('New');
