@@ -1,0 +1,45 @@
+<app-alert></app-alert>
+<div class="container">
+  <div class="row">
+    <form id="create-activity-form" #f="ngForm" (ngSubmit)="onCreateActivity(f)">
+      <div class="form-group">
+        <div class="col-xs-4">
+          <label for="department">department</label>
+          <div class="alert alert-danger" *ngIf="!departments">
+            Error while loading available departments
+          </div>
+          <select id="department" class="form-control" name="department" [ngModel]="defaultDepartment"
+                  *ngIf="departments">
+            <option *ngFor="let department of departments" [ngValue]="department">
+              {{ department.name }}
+            </option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-4">
+          <label for="name">Activity name</label>
+          <input type="text" id="name" class="form-control" name="name" ngModel required>
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-4">
+          <button id="add-activity" class="btn btn-success pull-right" type="submit" [disabled]="!f.valid">Add activity</button>
+        </div>
+      </div>
+    </form>
+  </div>
+  <hr *ngIf="!loading && activities">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <input #searchInput type="text" name="search" placeholder="Search" class="form-control"
+               (input)="filterList(searchInput.value)" autocomplete="off">
+      </div>
+    </div>
+  </div>
+  <hr *ngIf="!loading && activities">
+  <div id="activity-entries" class="container" *ngIf="!loading">
+    <app-activity *ngFor="let activity of activitiesFiltered" [activity]="activity"></app-activity>
+  </div>
+  <app-loading-spinner *ngIf="loading"></app-loading-spinner>

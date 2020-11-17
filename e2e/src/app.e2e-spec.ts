@@ -177,6 +177,7 @@ describe('Switch page login/register', () => {
   it('should change page from signup to signin', () => {
     page.navigateTo('signup');
 
+    //Click swith button
     element(by.id('switchToSignin')).click();
 
     //Browser should direct to signup page

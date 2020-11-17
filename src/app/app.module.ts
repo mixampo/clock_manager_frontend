@@ -24,6 +24,10 @@ import {AnonymousAuthGuard} from "./auth/anonymous.auth.guard";
 import {ActivityService} from './service/activity.service';
 import { WorktimeRegistrationComponent } from './worktime-registration/worktime-registration.component';
 import { AlertComponent } from './alert/alert.component';
+import { ActivitiesComponent } from './activities/activities.component';
+import { DepartmentsComponent } from './departments/departments.component';
+import { ActivityComponent } from './activity/activity.component';
+import {AdminAuthGuard} from './auth/admin.auth.guard';
 
 @NgModule({
   declarations: [
@@ -38,6 +42,9 @@ import { AlertComponent } from './alert/alert.component';
     LoadingSpinnerComponent,
     WorktimeRegistrationComponent,
     AlertComponent,
+    ActivitiesComponent,
+    DepartmentsComponent,
+    ActivityComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +60,8 @@ import { AlertComponent } from './alert/alert.component';
     AlertService,
     AuthService,
     AuthGuard,
-    AnonymousAuthGuard
+    AnonymousAuthGuard,
+    AdminAuthGuard
     // {
     //   provide: HTTP_INTERCEPTORS,
     //   useClass: AuthInterceptorService,
